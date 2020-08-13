@@ -1,6 +1,7 @@
 package file_management;
 
 import auxiliar_source.GeneralVariables;
+import source.Quadrant;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
