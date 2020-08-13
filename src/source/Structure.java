@@ -17,9 +17,12 @@ public class Structure {
     private ArrayList<CrossBar> crossBars;
 
     public Structure() {
+        super();
+        this.crossBars = new ArrayList<>();
     }
 
     public Structure(String id, double width, double height) {
+        super();
         this.id = id;
         this.width = width;
         this.height = height;
@@ -29,6 +32,7 @@ public class Structure {
         this.fenceSpacing = 0;
         this.covering = 0;
         this.compressiveStrengthOfConcrete = 0;
+        this.crossBars = new ArrayList<>();
     }
 
     public String getId() {

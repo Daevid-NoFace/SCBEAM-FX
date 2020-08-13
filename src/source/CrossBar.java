@@ -11,10 +11,12 @@ public class CrossBar {
     private TreeMap<Double, ArrayList<Quadrant>> time_quadrantList_TreeMap;
 
     public CrossBar() {
+        super();
         this.time_quadrantList_TreeMap = new TreeMap<>();
     }
 
     public CrossBar(double diameter, double tensileStrength, double tensileModulusOfElasticity) {
+        super();
         this.diameter = diameter;
         this.tensileStrength = tensileStrength;
         this.tensileModulusOfElasticity = tensileModulusOfElasticity;

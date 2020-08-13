@@ -13,10 +13,12 @@ public class LongitudinalBar {
     private TreeMap<Double, ArrayList<Quadrant>> time_quadrantList_TreeMap;
 
     public LongitudinalBar() {
+        super();
         time_quadrantList_TreeMap = new TreeMap<>();
     }
 
     public LongitudinalBar(double diameter, double tensileStrength, char exposureType, char fiberType) {
+        super();
         this.diameter = diameter;
         this.tensileStrength = tensileStrength;
         this.exposureType = exposureType;
