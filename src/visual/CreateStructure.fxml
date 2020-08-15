@@ -30,19 +30,19 @@
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="178.0" text="Altura:">
+      <Label layoutX="21.0" layoutY="167.0" text="Altura:">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="234.0" text="Recubrimiento:">
+      <Label layoutX="24.0" layoutY="215.0" text="Recubrimiento:">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
       <Spinner fx:id="spinnerWidth" layoutX="181.0" layoutY="114.0" prefHeight="31.0" prefWidth="82.0" />
-      <Spinner fx:id="spinnerHeigth" layoutX="181.0" layoutY="176.0" prefHeight="31.0" prefWidth="82.0" />
-      <Spinner fx:id="spinnerRecub" layoutX="181.0" layoutY="230.0" prefHeight="31.0" prefWidth="82.0" />
+      <Spinner fx:id="spinnerHeigth" layoutX="181.0" layoutY="161.0" prefHeight="31.0" prefWidth="82.0" />
+      <Spinner fx:id="spinnerRecub" layoutX="181.0" layoutY="209.0" prefHeight="31.0" prefWidth="82.0" />
       <Label layoutX="13.0" layoutY="315.0" text="Refuerzo Longitudinal">
          <font>
             <Font name="Segoe UI Bold" size="18.0" />
@@ -80,12 +80,12 @@
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="270.0" layoutY="234.0" text="cm">
+      <Label layoutX="271.0" layoutY="215.0" text="cm">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="270.0" layoutY="182.0" text="cm">
+      <Label layoutX="270.0" layoutY="167.0" text="cm">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
@@ -106,7 +106,7 @@
          </font>
       </Label>
       <JFXComboBox fx:id="comboReforce" layoutX="180.0" layoutY="516.0" prefHeight="31.0" prefWidth="123.0" promptText="Vidrio" />
-      <JFXButton fx:id="btnCreateReforcementLong" buttonType="RAISED" layoutX="31.0" layoutY="568.0" style="-fx-background-color: #2a9134;" text="Crear Refuerzo" textFill="WHITE">
+      <JFXButton fx:id="btnCreateReforcementLong" buttonType="RAISED" layoutX="23.0" layoutY="570.0" style="-fx-background-color: #2a9134;" text="Crear Refuerzo" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -166,7 +166,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnCreateStructure" buttonType="RAISED" layoutX="506.0" layoutY="578.0" style="-fx-background-color: #2a9134;" text="Crear Estructura" textFill="WHITE">
+      <JFXButton fx:id="btnCreateStructure" buttonType="RAISED" layoutX="27.0" layoutY="253.0" style="-fx-background-color: #2a9134;" text="Crear Estructura" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
