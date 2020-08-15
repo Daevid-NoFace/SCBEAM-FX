@@ -266,10 +266,9 @@
         </entry>
       </map>
     </option>
-<<<<<<< HEAD
     <option name="oldMeFiltersMigrated" value="true" />
-=======
->>>>>>> developing-rafa
+    =======
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; developing-rafa
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
