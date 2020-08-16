@@ -20,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class PrincipalMenuController implements Initializable {
 
-
     private File file;
 
     @FXML
