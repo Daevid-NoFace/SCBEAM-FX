@@ -1,41 +1,39 @@
 package file_management;
 
 import auxiliar_source.GeneralVariables;
+import com.opencsv.CSVReader;
 import source.Quadrant;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 public class FileReading {
 
-    private static StringTokenizer stringTokenizer;
-
-    public static TreeMap<Double, ArrayList<Integer>> readFile (String sourceFolder) throws Exception { //only reading from .csv, I need to implements for .xls and .xlsx files
+    public static TreeMap<Double, ArrayList<Integer>> readFile (File sourceFile) { //only reading from .csv, I need to implements for .xls and .xlsx files
         TreeMap<Double, ArrayList<Integer>> readInput = new TreeMap<>();
-        BufferedReader cin = new BufferedReader(new FileReader(sourceFolder));
-        cin.readLine(); //jump de first line
-        
-        while(true) {
-            stringTokenizer = new StringTokenizer(cin.readLine());
-            String line = stringTokenizer.nextToken();
-            String[] array_element = line.split(",");
-            double currentTime = Double.parseDouble(array_element[0]);
-            ArrayList<Integer> temperaturesList = new ArrayList<>();
 
-            //if (checkTime(time)) {
-            for (int i = 1; i < array_element.length; i++)
-                temperaturesList.add(Integer.parseInt(array_element[i]));
+        try {
+            CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(sourceFile.toString()), StandardCharsets.ISO_8859_1));
+            String[] nextLine;
+            reader.readNext();  //I don't care the first line
 
-            readInput.put(currentTime, temperaturesList);
-            //}
-            if (!cin.ready())
-                break;
+            while ((nextLine = reader.readNext()) != null) {
+                double time = Double.parseDouble(nextLine[0]);
+                ArrayList<Integer> temperaturesList = new ArrayList<>();
+
+                for (int i = 1; i < nextLine.length; i++) {
+                    temperaturesList.add(Integer.parseInt(nextLine[i]));
+                    readInput.put(time, temperaturesList);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Reading File Error");
+            e.getMessage();
+            e.printStackTrace();
         }
-
-        cin.close();    //close the file
 
         return readInput;
     }
