@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Spinner;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,6 +50,10 @@ public class CreateStructureController implements Initializable {
 
     @FXML
     private JFXButton btnCreateStructure;
+
+    @FXML
+    private AnchorPane graphPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
