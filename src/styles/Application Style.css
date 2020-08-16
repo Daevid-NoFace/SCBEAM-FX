@@ -1,0 +1,5 @@
+#principalBtn,#structureBtn,#helpBtn{
+    -fx-effect: dropshadow(two-pass-box , #011b1d, 8, 0.1 , 3, 3);
+    -fx-background-color: #ff8000;
+    -fx-background-insets: 2 2 2 2 ;
+}
