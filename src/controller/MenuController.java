@@ -47,7 +47,7 @@ public class MenuController  implements Initializable {
     @FXML
     void showStructuresMenu(ActionEvent event) {
         try {
-            this.createPage(principalPane, "/visual/CreateStructure.fxml");
+            this.createPage(principalPane,  "/visual/CreateStructure.fxml");
         }catch (Exception e){
             e.printStackTrace();
         }
