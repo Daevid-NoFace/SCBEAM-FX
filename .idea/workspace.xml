@@ -118,6 +118,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/csv_reader" />
     <property name="recentsLimit" value="5" />
   </component>
+<<<<<<< Updated upstream
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX\src\visual" />
@@ -142,6 +143,9 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Main">
+=======
+  <component name="RunManager">
+>>>>>>> Stashed changes
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -160,6 +164,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="test.Main" />
       <module name="SCBEAM-FX" />
@@ -174,6 +179,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+=======
+>>>>>>> Stashed changes
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.Main" />
       <module name="SCBEAM-FX" />
