@@ -17,7 +17,7 @@ public class FileReading {
         TreeMap<Double, ArrayList<Integer>> readInput = new TreeMap<>();
         BufferedReader cin = new BufferedReader(new FileReader(sourceFolder));
         cin.readLine(); //jump de first line
-
+        
         while(true) {
             stringTokenizer = new StringTokenizer(cin.readLine());
             String line = stringTokenizer.nextToken();
