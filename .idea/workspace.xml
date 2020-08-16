@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="SCBEAM-FX:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -138,8 +143,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Telegram Desktop/SCBeam" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SCBEAM Jar" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
   </component>
   <component name="RecentsManager">
@@ -284,24 +292,38 @@
   <component name="WindowStateProjectService">
     <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser" timestamp="1597612375274" />
     <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1597612375274" />
-    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1597612375274" />
-    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597612375274" />
-    <state width="1493" height="116" key="GridCell.Tab.0.bottom" timestamp="1597612382717">
+    <state x="499" y="203" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1597614595137">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="116" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597612382717" />
-    <state width="1493" height="116" key="GridCell.Tab.0.center" timestamp="1597612382716">
+    <state x="499" y="203" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1597614595137" />
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1597614520157">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="116" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597612382716" />
-    <state width="1493" height="116" key="GridCell.Tab.0.left" timestamp="1597612382716">
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597614520157" />
+    <state width="1493" height="99" key="GridCell.Tab.0.bottom" timestamp="1597614491853">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="116" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597612382716" />
-    <state width="1493" height="116" key="GridCell.Tab.0.right" timestamp="1597612382717">
+    <state width="1493" height="99" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597614491853" />
+    <state width="1493" height="99" key="GridCell.Tab.0.center" timestamp="1597614491853">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="116" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597612382717" />
+    <state width="1493" height="99" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597614491853" />
+    <state width="1493" height="99" key="GridCell.Tab.0.left" timestamp="1597614491852">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="99" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597614491852" />
+    <state width="1493" height="99" key="GridCell.Tab.0.right" timestamp="1597614491853">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="99" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597614491853" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1597614655513">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1597614655513" />
+    <state x="573" y="281" key="classpath-attribute-editor" timestamp="1597614129477">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="573" y="281" key="classpath-attribute-editor/0.0.1536.824@0.0.1536.824" timestamp="1597614129477" />
     <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1597612375274" />
     <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824@0.0.1536.824" timestamp="1597612375274" />
     <state x="209" y="73" key="new project wizard" timestamp="1597612375274" />

@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.*;
 import com.opencsv.CSVReader;
+import file_management.FileReading;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,11 +17,14 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 public class PrincipalMenuController implements Initializable {
 
     private File file;
+    private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap;
 
     @FXML
     private JFXTextField textFileName;
@@ -101,22 +105,13 @@ public class PrincipalMenuController implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento CSV","*csv"));
         file = fc.showOpenDialog(stage);
 
-        //Ejemplo de como leer el CSV
-        ArrayList<String> teams = new ArrayList<>();
-        try {
-            CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(file.toString()), StandardCharsets.ISO_8859_1));
-            String[]  nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                String team1    = nextLine[0];
-                teams.add(team1);
-            }
-            reader.close();
-            textFileName.setText(file.toString());
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        for (int i = 0; i < teams.size() ; i++) {
-            System.out.println(teams.get(i));
+        timeTemperaturesTreeMap = FileReading.readFile(file);
+
+        for(Map.Entry<Double,ArrayList<Integer>> entry : timeTemperaturesTreeMap.entrySet()) {
+            double key = entry.getKey();
+            ArrayList<Integer> value = entry.getValue();
+
+            System.out.println(key + " => " + value);
         }
 
 
