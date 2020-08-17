@@ -104,8 +104,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -302,8 +302,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1597640354494" />
-    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser" timestamp="1597612375274" />
-    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1597612375274" />
+    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser" timestamp="1597705138831">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1597705138831" />
     <state x="499" y="203" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1597614595137">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -312,38 +314,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597638255317" />
-    <state width="1495" height="199" key="GridCell.Tab.0.bottom" timestamp="1597641749006">
+    <state width="1495" height="133" key="GridCell.Tab.0.bottom" timestamp="1597703758573">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597641749006" />
-    <state width="1495" height="199" key="GridCell.Tab.0.center" timestamp="1597641749005">
+    <state width="1495" height="133" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597703758573" />
+    <state width="1495" height="133" key="GridCell.Tab.0.center" timestamp="1597703758573">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597641749005" />
-    <state width="1495" height="199" key="GridCell.Tab.0.left" timestamp="1597641749004">
+    <state width="1495" height="133" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597703758573" />
+    <state width="1495" height="133" key="GridCell.Tab.0.left" timestamp="1597703758573">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597641749004" />
-    <state width="1495" height="199" key="GridCell.Tab.0.right" timestamp="1597641749005">
+    <state width="1495" height="133" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597703758573" />
+    <state width="1495" height="133" key="GridCell.Tab.0.right" timestamp="1597703758573">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597641749005" />
-    <state width="1495" height="199" key="GridCell.Tab.1.bottom" timestamp="1597641768461">
+    <state width="1495" height="133" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597703758573" />
+    <state width="1495" height="34" key="GridCell.Tab.1.bottom" timestamp="1597694507884">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597641768461" />
-    <state width="1495" height="199" key="GridCell.Tab.1.center" timestamp="1597641768460">
+    <state width="1495" height="34" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597694507884" />
+    <state width="1495" height="34" key="GridCell.Tab.1.center" timestamp="1597694507883">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1597641768460" />
-    <state width="1495" height="199" key="GridCell.Tab.1.left" timestamp="1597641768459">
+    <state width="1495" height="34" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1597694507883" />
+    <state width="1495" height="34" key="GridCell.Tab.1.left" timestamp="1597694507883">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1597641768459" />
-    <state width="1495" height="199" key="GridCell.Tab.1.right" timestamp="1597641768460">
+    <state width="1495" height="34" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1597694507883" />
+    <state width="1495" height="34" key="GridCell.Tab.1.right" timestamp="1597694507884">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="199" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1597641768460" />
+    <state width="1495" height="34" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1597694507884" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1597640690308">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -358,17 +360,16 @@
     <state x="209" y="73" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1597612375274" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/controller/PrincipalMenuController.java</url>
-          <line>72</line>
-          <properties class="controller.PrincipalMenuController" method="searchFile">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.jfoenix.controls.JFXTextField" memberName="text" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="textFileName" language="JAVA" />
+        <watch expression="this" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

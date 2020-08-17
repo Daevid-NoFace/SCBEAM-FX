@@ -2,17 +2,25 @@ package file_management;
 
 import auxiliar_source.GeneralVariables;
 import com.opencsv.CSVReader;
+import javafx.concurrent.Task;
 import source.Quadrant;
 
+import javax.swing.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-public class FileReading {
+public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
 
-    public static TreeMap<Double, ArrayList<Integer>> readFile (File sourceFile) { //only reading from .csv, I need to implements for .xls and .xlsx files
+    private File sourceFile;
+
+    public FileReading(File sourceFile) {
+        this.sourceFile = sourceFile;
+    }
+
+    public TreeMap<Double, ArrayList<Integer>> readFile () { //only reading from .csv, I need to implements for .xls and .xlsx files
         TreeMap<Double, ArrayList<Integer>> readInput = new TreeMap<>();
 
         try {
@@ -28,6 +36,7 @@ public class FileReading {
                     temperaturesList.add(Integer.parseInt(nextLine[i]));
                     readInput.put(time, temperaturesList);
                 }
+
             }
 
             reader.close();
@@ -53,5 +62,15 @@ public class FileReading {
         }
 
         return check;
+    }
+
+    @Override
+    protected TreeMap<Double, ArrayList<Integer>> call() throws Exception {
+
+        updateMessage("Procesando... Hilo => " + Thread.currentThread().getName());
+        TreeMap<Double, ArrayList<Integer>> treeMap = readFile();
+        updateMessage("Terminado... Hilo => " + Thread.currentThread().getName());
+        updateProgress(100, 100);
+        return treeMap;
     }
 }

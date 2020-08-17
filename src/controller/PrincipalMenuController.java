@@ -3,12 +3,18 @@ package controller;
 import com.jfoenix.controls.*;
 import com.opencsv.CSVReader;
 import file_management.FileReading;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import source.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,14 +22,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PrincipalMenuController implements Initializable {
 
-    private ArrayList<File> files = new ArrayList<>();
+    List<File> loadFiles;
     private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = new TreeMap<>();
 
     @FXML
@@ -36,49 +41,90 @@ public class PrincipalMenuController implements Initializable {
     private JFXButton btnCleanFileName;
 
     @FXML
-    private JFXListView<?> listCreatedStrcutures;
+    private JFXListView<File> listLoadFiles;
 
     @FXML
-    private JFXListView<?> listNettingStructure;
+    private  JFXListView<File> listProcessedFiles;
 
     @FXML
-    private JFXButton btnCleanStructures;
-
-    @FXML
-    private JFXButton btnStructure;
+    private JFXButton btnProcessFile;
 
     @FXML
     private JFXButton btnSearchFile;
+
+    @FXML
+    private ProgressBar progressBar;
+
+    @FXML
+    private Label labelLoad;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        List<File> files = Controller.getSingletonController().getUnprocessedFiles();
+        listLoadFiles.setItems(FXCollections.observableList(files));
+        listLoadFiles.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
     }
 
     @FXML
     void cleanFileName(ActionEvent event) {
-
+        textFileName.clear();
     }
 
     @FXML
     void loadFile(ActionEvent event) {
 
-        File file = new File(textFileName.getText());
-        files.add(file);
-        System.out.println("Fichero leido. Tamaño de la lista -> " + files.size());
+        if (!textFileName.getText().equals("")) {
+            File file = new File(textFileName.getText());
+            Controller.getSingletonController().getUnprocessedFiles().add(file);
+            System.out.println("Fichero leido.");
+
+            listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
+        }
     }
 
     @FXML
     void searchFile(ActionEvent event) {
         Stage stage= new Stage();
         FileChooser fc= new FileChooser();
-        File file;
 
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento CSV","*csv"));
-        //fc.showOpenDialog(stage);
 
-        textFileName.setText(fc.showOpenDialog(stage).getPath());
-        System.out.println("Fichero encontrado");
+        try {
+            System.out.println("Buscando...");
+            textFileName.setText(fc.showOpenDialog(stage).getPath());
+            System.out.println("Fichero encontrado");
+        } catch (Exception e) {
+            System.out.println("Fichero no seleccionado");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void processFile(ActionEvent event) {
+
+        int index = listLoadFiles.getSelectionModel().getSelectedIndex();
+        File file = Controller.getSingletonController().getUnprocessedFiles().remove(index);
+
+        FileReading fileReading = new FileReading(file);
+        System.out.println("Hilo principal => " + Thread.currentThread().getName());
+        labelLoad.textProperty().bind(fileReading.messageProperty());
+
+        fileReading.setOnRunning((succeesesEvent) -> {
+            progressBar.progressProperty().bind(fileReading.progressProperty());
+        });
+
+        fileReading.setOnSucceeded((succeesesEvent) -> {
+            Controller.getSingletonController().getProcessedFiles().add(file);
+            Controller.getSingletonController().setTimeTemperaturesTreeMap(fileReading.getValue());
+            listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
+            listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
+        });
+
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        executorService.execute(fileReading);
+        executorService.shutdown();
     }
 }
