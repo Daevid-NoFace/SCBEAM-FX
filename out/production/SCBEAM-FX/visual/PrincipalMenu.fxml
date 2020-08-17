@@ -38,8 +38,8 @@
          </font>
       </Label>
       <JFXListView fx:id="listLoadFiles" layoutX="14.0" layoutY="219.0" prefHeight="400.0" prefWidth="307.0" />
-      <JFXProgressBar layoutX="14.0" layoutY="674.0" prefHeight="12.0" prefWidth="257.0" progress="0.5" />
-      <Label layoutX="14.0" layoutY="697.0" text="Cargando">
+      <JFXProgressBar fx:id="progressBar" layoutX="14.0" layoutY="674.0" prefHeight="12.0" prefWidth="257.0" progress="0.5" />
+      <Label fx:id="labelLoad" layoutX="14.0" layoutY="697.0" text="Cargando">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>

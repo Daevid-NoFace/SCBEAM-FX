@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
@@ -22,6 +23,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PrincipalMenuController implements Initializable {
 
@@ -51,6 +54,9 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     private ProgressBar progressBar;
+
+    @FXML
+    private Label labelLoad;
 
 
     @Override
@@ -101,10 +107,24 @@ public class PrincipalMenuController implements Initializable {
 
         int index = listLoadFiles.getSelectionModel().getSelectedIndex();
         File file = Controller.getSingletonController().getUnprocessedFiles().remove(index);
-        Controller.getSingletonController().setTimeTemperaturesTreeMap(FileReading.readFile(file));
-        Controller.getSingletonController().getProcessedFiles().add(file);
 
-        listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
-        listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
+        FileReading fileReading = new FileReading(file);
+        System.out.println("Hilo principal => " + Thread.currentThread().getName());
+        labelLoad.textProperty().bind(fileReading.messageProperty());
+
+        fileReading.setOnRunning((succeesesEvent) -> {
+            progressBar.progressProperty().bind(fileReading.progressProperty());
+        });
+
+        fileReading.setOnSucceeded((succeesesEvent) -> {
+            Controller.getSingletonController().getProcessedFiles().add(file);
+            Controller.getSingletonController().setTimeTemperaturesTreeMap(fileReading.getValue());
+            listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
+            listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
+        });
+
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        executorService.execute(fileReading);
+        executorService.shutdown();
     }
 }
