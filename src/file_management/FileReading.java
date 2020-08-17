@@ -29,6 +29,8 @@ public class FileReading {
                     readInput.put(time, temperaturesList);
                 }
             }
+
+            reader.close();
         } catch (Exception e) {
             System.out.println("Reading File Error");
             e.getMessage();

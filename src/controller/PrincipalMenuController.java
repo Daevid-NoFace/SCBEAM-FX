@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.*;
 import com.opencsv.CSVReader;
+import file_management.FileReading;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,11 +17,14 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 public class PrincipalMenuController implements Initializable {
 
-    private File file;
+    private ArrayList<File> files = new ArrayList<>();
+    private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = new TreeMap<>();
 
     @FXML
     private JFXTextField textFileName;
@@ -44,36 +48,11 @@ public class PrincipalMenuController implements Initializable {
     private JFXButton btnStructure;
 
     @FXML
-    private JFXComboBox<?> comboBarMaterial;
-
-    @FXML
-    private JFXRadioButton rbtnMethodP;
-
-    @FXML
-    private JFXRadioButton rbtnProm;
-
-    @FXML
-    private Spinner<?> timeSpinner;
-
-    @FXML
-    private JFXButton btnCalculate;
-
-    @FXML
-    private JFXButton btnCurve;
-
-    @FXML
-    private JFXButton btnCurveNiu;
+    private JFXButton btnSearchFile;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-
-
-    @FXML
-    void calculate(ActionEvent event) {
 
     }
 
@@ -83,52 +62,23 @@ public class PrincipalMenuController implements Initializable {
     }
 
     @FXML
-    void cleanStructures(ActionEvent event) {
-
-    }
-
-    @FXML
-    void createStructure(ActionEvent event) {
-
-    }
-
-    @FXML
     void loadFile(ActionEvent event) {
 
+        File file = new File(textFileName.getText());
+        files.add(file);
+        System.out.println("Fichero leido. Tamaño de la lista -> " + files.size());
+    }
+
+    @FXML
+    void searchFile(ActionEvent event) {
         Stage stage= new Stage();
         FileChooser fc= new FileChooser();
+        File file;
 
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento CSV","*csv"));
-        file = fc.showOpenDialog(stage);
+        //fc.showOpenDialog(stage);
 
-        //Ejemplo de como leer el CSV
-        ArrayList<String> teams = new ArrayList<>();
-        try {
-            CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(file.toString()), StandardCharsets.ISO_8859_1));
-            String[]  nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                String team1    = nextLine[0];
-                teams.add(team1);
-            }
-            reader.close();
-            textFileName.setText(file.toString());
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        for (int i = 0; i < teams.size() ; i++) {
-            System.out.println(teams.get(i));
-        }
-
-
-    }
-
-    @FXML
-    void showCurve(ActionEvent event) {
-
-    }
-
-    @FXML
-    void showCurveNiu(ActionEvent event) {
-
+        textFileName.setText(fc.showOpenDialog(stage).getPath());
+        System.out.println("Fichero encontrado");
     }
 }

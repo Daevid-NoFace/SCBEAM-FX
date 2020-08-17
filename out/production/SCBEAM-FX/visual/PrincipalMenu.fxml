@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXProgressBar?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="735.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalMenuController">
+<AnchorPane prefHeight="735.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalMenuController">
    <children>
       <MenuBar layoutX="-3.0" layoutY="-2.0" prefHeight="32.0" prefWidth="926.0">
         <menus>
@@ -47,7 +43,7 @@
             <Font name="Segoe UI Bold" size="19.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="textFileName" layoutX="14.0" layoutY="82.0" prefHeight="31.0" prefWidth="307.0" />
+      <JFXTextField fx:id="textFileName" layoutX="14.0" layoutY="82.0" prefHeight="31.0" prefWidth="249.0" />
       <JFXButton fx:id="btnLoadFile" buttonType="RAISED" layoutX="14.0" layoutY="134.0" onAction="#loadFile" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096c7;" text="Cargar Fichero" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -63,55 +59,12 @@
       </Label>
       <JFXListView fx:id="listCreatedStrcutures" layoutX="14.0" layoutY="219.0" prefHeight="400.0" prefWidth="307.0" />
       <JFXListView fx:id="listNettingStructure" layoutX="331.0" layoutY="82.0" prefHeight="536.0" prefWidth="328.0" />
-      <JFXButton fx:id="btnCleanStructures" buttonType="RAISED" layoutX="168.0" layoutY="627.0" onAction="#cleanStructures" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #d00000;" text="Limpiar" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXButton>
-      <JFXButton fx:id="btnStructure" buttonType="RAISED" layoutX="14.0" layoutY="627.0" onAction="#createStructure" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #2a9134;" text="Mallar Estructura" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXButton>
       <JFXProgressBar layoutX="14.0" layoutY="674.0" prefHeight="12.0" prefWidth="257.0" progress="0.5" />
       <Label layoutX="14.0" layoutY="697.0" text="Cargando">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="687.0" layoutY="46.0" text="Cálculos:">
-         <font>
-            <Font name="Segoe UI Bold" size="19.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="comboBarMaterial" layoutX="687.0" layoutY="91.0" prefHeight="31.0" prefWidth="180.0" promptText="Material de las barras" />
-      <Separator layoutX="668.0" layoutY="59.0" prefHeight="2.0" prefWidth="12.0" />
-      <Separator layoutX="665.0" layoutY="58.0" orientation="VERTICAL" prefHeight="559.0" prefWidth="12.0" />
-      <Separator layoutX="910.0" layoutY="57.0" orientation="VERTICAL" prefHeight="559.0" prefWidth="12.0" />
-      <Separator layoutX="777.0" layoutY="52.0" prefHeight="12.0" prefWidth="139.0" />
-      <Separator layoutX="671.0" layoutY="611.0" prefHeight="12.0" prefWidth="244.0" />
-      <Label layoutX="687.0" layoutY="165.0" text="Cálculo:">
-         <font>
-            <Font name="Segoe UI Bold" size="16.0" />
-         </font>
-      </Label>
-      <JFXRadioButton fx:id="rbtnMethodP" layoutX="691.0" layoutY="209.0" text="Método P" />
-      <JFXRadioButton fx:id="rbtnProm" layoutX="691.0" layoutY="255.0" text="Promedio" />
-      <Label layoutX="687.0" layoutY="311.0" text="Tiempo:">
-         <font>
-            <Font name="Segoe UI Bold" size="16.0" />
-         </font>
-      </Label>
-      <Spinner fx:id="timeSpinner" layoutX="774.0" layoutY="305.0" prefHeight="31.0" prefWidth="95.0" />
-      <JFXButton fx:id="btnCalculate" buttonType="RAISED" layoutX="669.0" layoutY="627.0" onAction="#calculate" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #2a9134;" text="Calcular" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXButton>
-      <JFXButton fx:id="btnCurve" buttonType="RAISED" layoutX="799.0" layoutY="627.0" onAction="#showCurve" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #2a9134;" text="Curva" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXButton>
-      <JFXButton fx:id="btnCurveNiu" buttonType="RAISED" layoutX="668.0" layoutY="671.0" onAction="#showCurveNiu" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #2a9134;" text="Curva Niu" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXButton>
+      <JFXButton fx:id="btnSearchFile" layoutX="269.0" layoutY="82.0" onAction="#searchFile" prefHeight="31.0" prefWidth="40.0" />
    </children>
 </AnchorPane>
