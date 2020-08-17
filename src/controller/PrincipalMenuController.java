@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Spinner;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import source.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,7 +37,7 @@ public class PrincipalMenuController implements Initializable {
     private JFXButton btnCleanFileName;
 
     @FXML
-    private JFXListView<?> listCreatedStrcutures;
+    private JFXListView<?> listLoadFiles;
 
     @FXML
     private JFXListView<?> listNettingStructure;
@@ -58,27 +59,35 @@ public class PrincipalMenuController implements Initializable {
 
     @FXML
     void cleanFileName(ActionEvent event) {
-
+        textFileName.clear();
     }
 
     @FXML
     void loadFile(ActionEvent event) {
 
-        File file = new File(textFileName.getText());
-        files.add(file);
-        System.out.println("Fichero leido. Tamaño de la lista -> " + files.size());
+        if (!textFileName.getText().equals("")) {
+            File file = new File(textFileName.getText());
+            files.add(file);
+            Controller.getSingletonController().getFiles().add(file);
+            System.out.println("Fichero leido.");
+
+        }
     }
 
     @FXML
     void searchFile(ActionEvent event) {
         Stage stage= new Stage();
         FileChooser fc= new FileChooser();
-        File file;
 
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento CSV","*csv"));
-        //fc.showOpenDialog(stage);
 
-        textFileName.setText(fc.showOpenDialog(stage).getPath());
-        System.out.println("Fichero encontrado");
+        try {
+            System.out.println("Buscando...");
+            textFileName.setText(fc.showOpenDialog(stage).getPath());
+            System.out.println("Fichero encontrado");
+        } catch (Exception e) {
+            System.out.println("Fichero no seleccionado");
+            e.printStackTrace();
+        }
     }
 }
