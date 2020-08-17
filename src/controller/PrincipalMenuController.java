@@ -3,9 +3,13 @@ package controller;
 import com.jfoenix.controls.*;
 import com.opencsv.CSVReader;
 import file_management.FileReading;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,14 +21,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
+import java.util.*;
 
 public class PrincipalMenuController implements Initializable {
 
-    private ArrayList<File> files = new ArrayList<>();
+    List<File> loadFiles;
     private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = new TreeMap<>();
 
     @FXML
@@ -37,24 +38,28 @@ public class PrincipalMenuController implements Initializable {
     private JFXButton btnCleanFileName;
 
     @FXML
-    private JFXListView<?> listLoadFiles;
+    private JFXListView<File> listLoadFiles;
 
     @FXML
-    private JFXListView<?> listNettingStructure;
+    private  JFXListView<File> listProcessedFiles;
 
     @FXML
-    private JFXButton btnCleanStructures;
-
-    @FXML
-    private JFXButton btnStructure;
+    private JFXButton btnProcessFile;
 
     @FXML
     private JFXButton btnSearchFile;
+
+    @FXML
+    private ProgressBar progressBar;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        List<File> files = Controller.getSingletonController().getUnprocessedFiles();
+        listLoadFiles.setItems(FXCollections.observableList(files));
+        listLoadFiles.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
     }
 
     @FXML
@@ -67,10 +72,10 @@ public class PrincipalMenuController implements Initializable {
 
         if (!textFileName.getText().equals("")) {
             File file = new File(textFileName.getText());
-            files.add(file);
-            Controller.getSingletonController().getFiles().add(file);
+            Controller.getSingletonController().getUnprocessedFiles().add(file);
             System.out.println("Fichero leido.");
 
+            listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
         }
     }
 
@@ -89,5 +94,17 @@ public class PrincipalMenuController implements Initializable {
             System.out.println("Fichero no seleccionado");
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void processFile(ActionEvent event) {
+
+        int index = listLoadFiles.getSelectionModel().getSelectedIndex();
+        File file = Controller.getSingletonController().getUnprocessedFiles().remove(index);
+        Controller.getSingletonController().setTimeTemperaturesTreeMap(FileReading.readFile(file));
+        Controller.getSingletonController().getProcessedFiles().add(file);
+
+        listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
+        listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
     }
 }

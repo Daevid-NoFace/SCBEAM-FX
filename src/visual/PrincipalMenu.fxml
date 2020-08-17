@@ -6,39 +6,19 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="735.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalMenuController">
    <children>
-      <MenuBar layoutX="-3.0" layoutY="-2.0" prefHeight="32.0" prefWidth="926.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Inicio">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Editar">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Ayuda">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Label layoutX="14.0" layoutY="46.0" text="Fichero Cargado:">
+      <Label layoutX="14.0" layoutY="46.0" text="Cargar Ficheros:">
          <font>
             <Font name="Segoe UI Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="331.0" layoutY="46.0" text="Estructuras Malladas:">
+      <Label layoutX="331.0" layoutY="46.0" text="Ficheros Procesados">
          <font>
             <Font name="Segoe UI Bold" size="19.0" />
          </font>
@@ -52,19 +32,34 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXButton>
-      <Label layoutX="14.0" layoutY="195.0" text="Ficheros Cargados:">
+      <Label layoutX="14.0" layoutY="195.0" text="Ficheros Cargados Sin Procesar:">
          <font>
             <Font name="Segoe UI Bold" size="19.0" />
          </font>
       </Label>
       <JFXListView fx:id="listLoadFiles" layoutX="14.0" layoutY="219.0" prefHeight="400.0" prefWidth="307.0" />
-      <JFXListView fx:id="listNettingStructure" layoutX="331.0" layoutY="82.0" prefHeight="536.0" prefWidth="328.0" />
-      <JFXProgressBar layoutX="14.0" layoutY="674.0" prefHeight="12.0" prefWidth="257.0" progress="0.5" />
+      <JFXProgressBar fx:id="progressBar" layoutX="14.0" layoutY="674.0" prefHeight="12.0" prefWidth="257.0" progress="0.5" />
       <Label layoutX="14.0" layoutY="697.0" text="Cargando">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnSearchFile" layoutX="269.0" layoutY="82.0" onAction="#searchFile" prefHeight="31.0" prefWidth="40.0" />
+      <JFXButton fx:id="btnSearchFile" layoutX="269.0" layoutY="82.0" onAction="#searchFile" prefHeight="19.0" prefWidth="34.0" style="-fx-background-color: #00b347;" text="">
+         <font>
+            <Font size="1.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/icons8-busca-mas-100.png" />
+               </image>
+            </ImageView>
+         </graphic></JFXButton>
+      <JFXButton fx:id="btnProcessFile" buttonType="RAISED" layoutX="14.0" layoutY="626.0" onAction="#processFile" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #0096c7;" text="Procesar Fichero" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXListView fx:id="listProcessedFiles" layoutX="331.0" layoutY="82.0" prefHeight="538.0" prefWidth="361.0" />
    </children>
 </AnchorPane>

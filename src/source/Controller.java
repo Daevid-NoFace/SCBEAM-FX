@@ -2,18 +2,23 @@ package source;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Controller {
 
     private static Controller singletonController;
 
-    private ArrayList<File> files;
+    private ArrayList<File> unprocessedFiles;
+    private ArrayList<File> processedFiles;
+    private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap;
 
     /**
      * Class constructor
      */
     public Controller() {
-        files = new ArrayList<>();
+        unprocessedFiles = new ArrayList<>();
+        timeTemperaturesTreeMap = new TreeMap<>();
+        processedFiles = new ArrayList<>();
     }
 
     /**
@@ -28,11 +33,27 @@ public class Controller {
         return singletonController;
     }
 
-    public ArrayList<File> getFiles() {
-        return files;
+    public ArrayList<File> getUnprocessedFiles() {
+        return unprocessedFiles;
     }
 
-    public void setFiles(ArrayList<File> files) {
-        this.files = files;
+    public void setUnprocessedFiles(ArrayList<File> unprocessedFiles) {
+        this.unprocessedFiles = unprocessedFiles;
+    }
+
+    public TreeMap<Double, ArrayList<Integer>> getTimeTemperaturesTreeMap() {
+        return timeTemperaturesTreeMap;
+    }
+
+    public void setTimeTemperaturesTreeMap(TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap) {
+        this.timeTemperaturesTreeMap = timeTemperaturesTreeMap;
+    }
+
+    public ArrayList<File> getProcessedFiles() {
+        return processedFiles;
+    }
+
+    public void setProcessedFiles(ArrayList<File> processedFiles) {
+        this.processedFiles = processedFiles;
     }
 }
