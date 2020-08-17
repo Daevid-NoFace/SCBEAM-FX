@@ -23,8 +23,8 @@ import java.util.TreeMap;
 
 public class PrincipalMenuController implements Initializable {
 
-    private File file;
-    private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap;
+    private ArrayList<File> files = new ArrayList<>();
+    private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = new TreeMap<>();
 
     @FXML
     private JFXTextField textFileName;
@@ -48,36 +48,11 @@ public class PrincipalMenuController implements Initializable {
     private JFXButton btnStructure;
 
     @FXML
-    private JFXComboBox<?> comboBarMaterial;
-
-    @FXML
-    private JFXRadioButton rbtnMethodP;
-
-    @FXML
-    private JFXRadioButton rbtnProm;
-
-    @FXML
-    private Spinner<?> timeSpinner;
-
-    @FXML
-    private JFXButton btnCalculate;
-
-    @FXML
-    private JFXButton btnCurve;
-
-    @FXML
-    private JFXButton btnCurveNiu;
+    private JFXButton btnSearchFile;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-
-
-    @FXML
-    void calculate(ActionEvent event) {
 
     }
 
@@ -87,43 +62,23 @@ public class PrincipalMenuController implements Initializable {
     }
 
     @FXML
-    void cleanStructures(ActionEvent event) {
-
-    }
-
-    @FXML
-    void createStructure(ActionEvent event) {
-
-    }
-
-    @FXML
     void loadFile(ActionEvent event) {
 
+        File file = new File(textFileName.getText());
+        files.add(file);
+        System.out.println("Fichero leido. Tamaño de la lista -> " + files.size());
+    }
+
+    @FXML
+    void searchFile(ActionEvent event) {
         Stage stage= new Stage();
         FileChooser fc= new FileChooser();
+        File file;
 
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento CSV","*csv"));
-        file = fc.showOpenDialog(stage);
+        //fc.showOpenDialog(stage);
 
-        timeTemperaturesTreeMap = FileReading.readFile(file);
-
-        for(Map.Entry<Double,ArrayList<Integer>> entry : timeTemperaturesTreeMap.entrySet()) {
-            double key = entry.getKey();
-            ArrayList<Integer> value = entry.getValue();
-
-            System.out.println(key + " => " + value);
-        }
-
-
-    }
-
-    @FXML
-    void showCurve(ActionEvent event) {
-
-    }
-
-    @FXML
-    void showCurveNiu(ActionEvent event) {
-
+        textFileName.setText(fc.showOpenDialog(stage).getPath());
+        System.out.println("Fichero encontrado");
     }
 }
