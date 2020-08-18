@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="735.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+<AnchorPane prefHeight="729.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
    <children>
-      <AnchorPane prefHeight="735.0" prefWidth="262.0" style="-fx-background-color: #ff8000;">
+      <AnchorPane prefHeight="729.0" prefWidth="262.0" style="-fx-background-color: #ff8000;">
          <children>
             <JFXButton fx:id="principalBtn" buttonType="RAISED" layoutX="37.0" layoutY="192.0" onAction="#showPrincipalMenu" prefHeight="51.0" prefWidth="199.0" ripplerFill="WHITE" stylesheets="@../styles/ApplicationStyle.css" text="Principal" textFill="WHITE">
                <cursor>
@@ -46,6 +45,6 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="principalPane" layoutX="262.0" prefHeight="735.0" prefWidth="927.0" />
+      <AnchorPane fx:id="principalPane" layoutX="262.0" prefHeight="729.0" prefWidth="710.0" />
    </children>
 </AnchorPane>
