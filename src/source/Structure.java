@@ -18,8 +18,8 @@ public class Structure {
     private double covering;
     private double compressiveStrengthOfConcrete;
     private double fenceSpacing;
-    private LongitudinalBar longitudinalBar;
-    private ArrayList<CrossBar> crossBars;
+    private Bar longitudinalBar;
+    private ArrayList<Bar> crossBars;
     private TreeMap<Double, ArrayList<ArrayList<Quadrant>>> temperatureMeshes;  //K = time, V = matrix of quadrants
 
     public Structure() {
@@ -113,19 +113,19 @@ public class Structure {
         this.fenceSpacing = fenceSpacing;
     }
 
-    public LongitudinalBar getLongitudinalBar() {
+    public Bar getLongitudinalBar() {
         return longitudinalBar;
     }
 
-    public void setLongitudinalBar(LongitudinalBar longitudinalBar) {
+    public void setLongitudinalBar(Bar longitudinalBar) {
         this.longitudinalBar = longitudinalBar;
     }
 
-    public ArrayList<CrossBar> getCrossBars() {
+    public ArrayList<Bar> getCrossBars() {
         return crossBars;
     }
 
-    public void setCrossBars(ArrayList<CrossBar> crossBars) {
+    public void setCrossBars(ArrayList<Bar> crossBars) {
         this.crossBars = crossBars;
     }
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="principalPane" prefHeight="729.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StructuresController">
+   <children>
+      <Label layoutX="14.0" layoutY="80.0" text="Estructuras Sin Mallar">
+         <font>
+            <Font name="Segoe UI Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="14.0" text="Menu de Estructuras">
+         <font>
+            <Font name="Segoe UI Bold" size="25.0" />
+         </font>
+      </Label>
+      <JFXListView layoutX="13.0" layoutY="104.0" prefHeight="538.0" prefWidth="241.0" />
+      <JFXButton contentDisplay="RIGHT" layoutX="271.0" layoutY="236.0" style="-fx-background-color: #0096c7;" text="Mallar Estructura" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="200.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@../icons/icons8-left-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton layoutX="154.0" layoutY="652.0" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d00000;" text="Eliminar" textFill="WHITE" />
+      <JFXListView layoutX="455.0" layoutY="104.0" prefHeight="538.0" prefWidth="241.0" />
+      <JFXButton fx:id="btnCreateStructure" layoutX="14.0" layoutY="652.0" onAction="#showCreateStructure" style="-fx-background-color: #00b347;" text="Crear Estructura" textFill="WHITE" />
+      <Label layoutX="455.0" layoutY="82.0" text="Estructuras Malladas">
+         <font>
+            <Font name="Segoe UI Bold" size="19.0" />
+         </font></Label>
+      <JFXButton layoutX="596.0" layoutY="652.0" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d00000;" text="Eliminar" textFill="WHITE" />
+   </children>
+</AnchorPane>

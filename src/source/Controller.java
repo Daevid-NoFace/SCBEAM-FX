@@ -56,4 +56,6 @@ public class Controller {
     public void setProcessedFiles(ArrayList<File> processedFiles) {
         this.processedFiles = processedFiles;
     }
+
+
 }
