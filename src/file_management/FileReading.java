@@ -3,13 +3,9 @@ package file_management;
 import auxiliar_source.GeneralVariables;
 import com.opencsv.CSVReader;
 import javafx.concurrent.Task;
-import source.Quadrant;
-
-import javax.swing.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
@@ -36,9 +32,7 @@ public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
                     temperaturesList.add(Integer.parseInt(nextLine[i]));
                     readInput.put(time, temperaturesList);
                 }
-
             }
-
             reader.close();
         } catch (Exception e) {
             System.out.println("Reading File Error");
