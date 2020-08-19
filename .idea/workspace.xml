@@ -155,14 +155,14 @@
     <property name="settings.editor.selected.configurable" value="build.tools" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX\src\visual" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX\lib\csv_reader" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX\lib\csv_reader" />
       <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX" />
       <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX\lib" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX\src\visual" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SCBEAM-FX\lib\csv_reader" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -302,10 +302,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1597640354494" />
-    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser" timestamp="1597713578785">
+    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser" timestamp="1597853928144">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1597713578785" />
+    <state x="795" y="32" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1597853928144" />
     <state x="499" y="203" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1597614595137">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -318,38 +318,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597718816771" />
-    <state width="1495" height="133" key="GridCell.Tab.0.bottom" timestamp="1597718423412">
+    <state width="1495" height="133" key="GridCell.Tab.0.bottom" timestamp="1597855782180">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="133" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597718423412" />
-    <state width="1495" height="133" key="GridCell.Tab.0.center" timestamp="1597718423412">
+    <state width="1495" height="133" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597855782180" />
+    <state width="1495" height="133" key="GridCell.Tab.0.center" timestamp="1597855782180">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="133" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597718423412" />
-    <state width="1495" height="133" key="GridCell.Tab.0.left" timestamp="1597718423412">
+    <state width="1495" height="133" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597855782180" />
+    <state width="1495" height="133" key="GridCell.Tab.0.left" timestamp="1597855782180">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="133" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597718423412" />
-    <state width="1495" height="133" key="GridCell.Tab.0.right" timestamp="1597718423412">
+    <state width="1495" height="133" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597855782180" />
+    <state width="1495" height="133" key="GridCell.Tab.0.right" timestamp="1597855782180">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="133" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597718423412" />
-    <state width="1495" height="34" key="GridCell.Tab.1.bottom" timestamp="1597694507884">
+    <state width="1495" height="133" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597855782180" />
+    <state width="1495" height="200" key="GridCell.Tab.1.bottom" timestamp="1597831642572">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="34" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597694507884" />
-    <state width="1495" height="34" key="GridCell.Tab.1.center" timestamp="1597694507883">
+    <state width="1495" height="200" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597831642572" />
+    <state width="1495" height="200" key="GridCell.Tab.1.center" timestamp="1597831642572">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="34" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1597694507883" />
-    <state width="1495" height="34" key="GridCell.Tab.1.left" timestamp="1597694507883">
+    <state width="1495" height="200" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1597831642572" />
+    <state width="1495" height="200" key="GridCell.Tab.1.left" timestamp="1597831642572">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="34" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1597694507883" />
-    <state width="1495" height="34" key="GridCell.Tab.1.right" timestamp="1597694507884">
+    <state width="1495" height="200" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1597831642572" />
+    <state width="1495" height="200" key="GridCell.Tab.1.right" timestamp="1597831642572">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="34" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1597694507884" />
+    <state width="1495" height="200" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1597831642572" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1597640690308">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

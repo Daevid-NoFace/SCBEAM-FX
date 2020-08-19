@@ -57,5 +57,15 @@ public class Controller {
         this.processedFiles = processedFiles;
     }
 
+    public ArrayList<String> getNamesOfProcessedFiles() {
+
+        ArrayList<String> namesList = new ArrayList<>();
+
+        for (File file: processedFiles)
+            namesList.add(file.getName());
+
+        return namesList;
+    }
+
 
 }

@@ -166,7 +166,7 @@
          </cursor>
       </JFXButton>
       <JFXTextArea editable="false" layoutX="337.0" layoutY="324.0" prefHeight="246.0" prefWidth="295.0" />
-      <JFXButton layoutX="13.0" layoutY="25.0" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #d00000;" text="Atras" textFill="WHITE" />
+      <JFXButton fx:id="btnBack" layoutX="13.0" layoutY="25.0" onAction="#backToStructure" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #d00000;" text="Atras" textFill="WHITE" />
       <ImageView fitHeight="21.0" fitWidth="50.0" layoutX="20.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/icons8-left-50.png" />

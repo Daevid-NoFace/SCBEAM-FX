@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -38,5 +39,11 @@
             <Font name="Segoe UI Bold" size="19.0" />
          </font></Label>
       <JFXButton layoutX="596.0" layoutY="652.0" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d00000;" text="Eliminar" textFill="WHITE" />
+      <Label layoutX="255.0" layoutY="82.0" text="Ficheros Procesados">
+         <font>
+            <Font name="Segoe UI Bold" size="19.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="fileComboBox" layoutX="271.0" layoutY="106.0" onAction="#selectProcessedFile" prefHeight="31.0" prefWidth="166.0" />
    </children>
 </AnchorPane>

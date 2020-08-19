@@ -33,10 +33,14 @@ public class MenuController  implements Initializable {
 
     }
 
+    public AnchorPane getPrincipalPane() {
+        return this.principalPane;
+    }
+
     @FXML
     void showPrincipalMenu(ActionEvent event) {
         try {
-            this.createPage(principalPane, "/visual/PrincipalMenu.fxml");
+            this.createPage(new PrincipalMenuController(), principalPane, "/visual/PrincipalMenu.fxml");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -45,10 +49,38 @@ public class MenuController  implements Initializable {
     @FXML
     void showStructuresMenu(ActionEvent event) {
         try {
-            this.createPage(principalPane,  "/visual/Structures.fxml");
+
+            createPage(new StructuresController(), principalPane, "/visual/Structures.fxml");
+            /*
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MenuController.class.getResource("/visual/Structures.fxml"));
+            AnchorPane ap = loader.load();
+            StructuresController structuresController = loader.getController();
+            structuresController.setMenuController(this);
+            //this.createPage(principalPane,  "/visual/Structures.fxml");
+            this.setNode(ap);
+
+             */
+
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void createPage(Object instance, AnchorPane home, String loc) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MenuController.class.getResource(loc));
+        home = loader.load();
+
+        if (instance instanceof StructuresController) {
+            instance = loader.getController();
+            ((StructuresController) instance).setMenuController(this);
+        } else if (instance instanceof CreateStructureController) {
+            instance = loader.getController();
+            ((CreateStructureController) instance).setMenuController(this);
+        }
+
+        setNode(home);
     }
 
     public void setNode(Node node) {
@@ -64,9 +96,6 @@ public class MenuController  implements Initializable {
     }
 
 
-    public void createPage(AnchorPane home, String loc) throws IOException {
-        home = FXMLLoader.load(getClass().getResource(loc));
-        setNode(home);
-    }
+
 
 }
