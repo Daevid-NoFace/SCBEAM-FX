@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
+import file_management.FileReading;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -13,12 +14,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import source.BuildBeam;
 import source.Controller;
+import source.Structure;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class StructuresController implements Initializable {
 
@@ -40,9 +47,16 @@ public class StructuresController implements Initializable {
     @FXML
     private JFXButton btnDeleteNonMeshedStructure;
 
+    @FXML
+    private JFXButton btnMeshStructure;
+
+    @FXML
+    private JFXListView listMeshedStructures;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
+        listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getMeshStructures()));
         fileComboBox.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfProcessedFiles()));
     }
 
@@ -63,7 +77,6 @@ public class StructuresController implements Initializable {
         ft.play();
     }
 
-
     public void createPage(AnchorPane home, String loc) throws IOException {
         home = FXMLLoader.load(getClass().getResource(loc));
         setNode(home);
@@ -83,5 +96,25 @@ public class StructuresController implements Initializable {
         listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
     }
 
+    public void meshStructure(ActionEvent event) {
+        int indexStructure = listNonMeshedStructures.getSelectionModel().getSelectedIndex();
+        int indexFile = fileComboBox.getSelectionModel().getSelectedIndex();
+        File file = Controller.getSingletonController().getProcessedFiles().get(indexFile);
+        TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = Controller.getSingletonController().getTimeTemperaturesTreeMap().get((File) file);
 
+        BuildBeam buildBeam = new BuildBeam(indexStructure, timeTemperaturesTreeMap);
+
+        buildBeam.setOnRunning((succeesesEvent) -> {
+        });
+
+        buildBeam.setOnSucceeded((succeesesEvent) -> {
+            Controller.getSingletonController().getNonMeshedStructures().remove(indexFile);
+            listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
+            listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfMeshedStructures()));
+        });
+
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        executorService.execute(buildBeam);
+        executorService.shutdown();
+    }
 }

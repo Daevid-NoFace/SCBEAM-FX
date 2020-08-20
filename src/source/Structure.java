@@ -27,6 +27,7 @@ public class Structure {
         this.crossBars = new ArrayList<>();
         longitudinalBar = new Bar();
         crossBars =  new ArrayList<>();
+        temperatureMeshes = new TreeMap<>();
     }
 
     public Structure(String id, double width, double height) {
@@ -40,8 +41,9 @@ public class Structure {
         this.fenceSpacing = 0;
         this.covering = 0;
         this.compressiveStrengthOfConcrete = 0;
-        longitudinalBar = new Bar();
+        this.longitudinalBar = new Bar();
         this.crossBars = new ArrayList<>();
+        this.temperatureMeshes = new TreeMap<>();
     }
 
     public String getId() {

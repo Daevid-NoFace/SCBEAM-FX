@@ -22,7 +22,7 @@
          </font>
       </Label>
       <JFXListView fx:id="listNonMeshedStructures" layoutX="13.0" layoutY="104.0" prefHeight="538.0" prefWidth="241.0" />
-      <JFXButton contentDisplay="RIGHT" layoutX="271.0" layoutY="236.0" style="-fx-background-color: #0096c7;" text="Mallar Estructura" textFill="WHITE">
+      <JFXButton fx:id="btnMeshStructure" contentDisplay="RIGHT" layoutX="271.0" layoutY="236.0" onAction="#meshStructure" style="-fx-background-color: #0096c7;" text="Mallar Estructura" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="200.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                <image>
@@ -32,7 +32,7 @@
          </graphic>
       </JFXButton>
       <JFXButton fx:id="btnDeleteNonMeshedStructure" layoutX="154.0" layoutY="652.0" onAction="#deleteNonMeshedStructure" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d00000;" text="Eliminar" textFill="WHITE" />
-      <JFXListView layoutX="455.0" layoutY="104.0" prefHeight="538.0" prefWidth="241.0" />
+      <JFXListView fx:id="listMeshedStructures" layoutX="455.0" layoutY="104.0" prefHeight="538.0" prefWidth="241.0" />
       <JFXButton fx:id="btnCreateStructure" layoutX="14.0" layoutY="652.0" onAction="#showCreateStructure" style="-fx-background-color: #00b347;" text="Crear Estructura" textFill="WHITE" />
       <Label layoutX="455.0" layoutY="82.0" text="Estructuras Malladas">
          <font>

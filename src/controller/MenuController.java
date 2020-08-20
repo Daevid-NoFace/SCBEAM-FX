@@ -78,6 +78,9 @@ public class MenuController  implements Initializable {
         } else if (instance instanceof CreateStructureController) {
             instance = loader.getController();
             ((CreateStructureController) instance).setMenuController(this);
+        } else if (instance instanceof PrincipalMenuController) {
+            instance = loader.getController();
+            ((PrincipalMenuController) instance).setMenuController(this);
         }
 
         setNode(home);
