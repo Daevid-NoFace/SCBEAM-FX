@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListView;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -33,8 +34,15 @@ public class StructuresController implements Initializable {
     @FXML
     private JFXComboBox<String> fileComboBox;
 
+    @FXML
+    private JFXListView listNonMeshedStructures;
+
+    @FXML
+    private JFXButton btnDeleteNonMeshedStructure;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
         fileComboBox.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfProcessedFiles()));
     }
 
@@ -68,9 +76,11 @@ public class StructuresController implements Initializable {
         menuController.createPage(new CreateStructureController(), structureOver, "/visual/CreateStructure.fxml");
     }
 
-    @FXML
-    void selectProcessedFile(ActionEvent event) {
-
+    public void deleteNonMeshedStructure(ActionEvent event) {
+        int index = listNonMeshedStructures.getSelectionModel().getSelectedIndex();
+        Controller.getSingletonController().getNonMeshedStructures().remove(index);
+        System.out.println("Estructura no mallada eliminada. Tamano de lista Estructuras no malladas => " + Controller.getSingletonController().getNonMeshedStructures().size());
+        listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
     }
 
 

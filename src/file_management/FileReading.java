@@ -58,6 +58,26 @@ public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
         return check;
     }
 
+    public static ArrayList<String> readTxt(String link) throws IOException {
+        ArrayList<String> list = new ArrayList<>();
+        System.out.println(link);
+
+        BufferedReader input = new BufferedReader(new FileReader(link));
+
+        try {
+            String line = null;
+            while (( line = input.readLine()) != null)
+                list.add(line);
+        } catch (IOException e) {
+            System.err.println("Error, file " + link + " didn't exist.");
+            e.printStackTrace();
+        } finally {
+            input.close();
+        }
+
+        return list;
+    }
+
     @Override
     protected TreeMap<Double, ArrayList<Integer>> call() throws Exception {
 

@@ -25,6 +25,8 @@ public class Structure {
     public Structure() {
         super();
         this.crossBars = new ArrayList<>();
+        longitudinalBar = new Bar();
+        crossBars =  new ArrayList<>();
     }
 
     public Structure(String id, double width, double height) {
@@ -38,6 +40,7 @@ public class Structure {
         this.fenceSpacing = 0;
         this.covering = 0;
         this.compressiveStrengthOfConcrete = 0;
+        longitudinalBar = new Bar();
         this.crossBars = new ArrayList<>();
     }
 

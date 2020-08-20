@@ -8,8 +8,14 @@ public class Controller {
 
     private static Controller singletonController;
 
+    //file lists
     private ArrayList<File> unprocessedFiles;
     private ArrayList<File> processedFiles;
+
+    //beam lists
+    private ArrayList<Structure> nonMeshedStructures;
+    private ArrayList<Structure> meshStructures;
+
     private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap;
 
     /**
@@ -19,6 +25,8 @@ public class Controller {
         unprocessedFiles = new ArrayList<>();
         timeTemperaturesTreeMap = new TreeMap<>();
         processedFiles = new ArrayList<>();
+        nonMeshedStructures = new ArrayList<>();
+        meshStructures = new ArrayList<>();
     }
 
     /**
@@ -67,5 +75,39 @@ public class Controller {
         return namesList;
     }
 
+    public ArrayList<Structure> getNonMeshedStructures() {
+        return nonMeshedStructures;
+    }
 
+    public void setNonMeshedStructures(ArrayList<Structure> nonMeshedStructures) {
+        this.nonMeshedStructures = nonMeshedStructures;
+    }
+
+    public ArrayList<Structure> getMeshStructures() {
+        return meshStructures;
+    }
+
+    public void setMeshStructures(ArrayList<Structure> meshStructures) {
+        this.meshStructures = meshStructures;
+    }
+
+    public ArrayList<String> getNamesOfNonMeshedStructures() {
+
+        ArrayList<String> namesList = new ArrayList<>();
+
+        for (Structure structure: nonMeshedStructures)
+            namesList.add(structure.getId());
+
+        return namesList;
+    }
+
+    public ArrayList<String> getNamesOfMeshedStructures() {
+
+        ArrayList<String> namesList = new ArrayList<>();
+
+        for (Structure structure: meshStructures)
+            namesList.add(structure.getId());
+
+        return namesList;
+    }
 }

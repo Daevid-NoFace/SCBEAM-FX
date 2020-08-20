@@ -94,8 +94,4 @@ public class MenuController  implements Initializable {
         ft.setAutoReverse(false);
         ft.play();
     }
-
-
-
-
 }
