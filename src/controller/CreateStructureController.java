@@ -81,6 +81,8 @@ public class CreateStructureController implements Initializable {
         try {
             comboReforce.setItems(FXCollections.observableList(FileReading.readTxt("D:/Tesis Lachi David/GitHub Online/SCBEAM-FX/src/icons/fiberTypeComboBox.txt")));
             comboExpos.setItems(FXCollections.observableList(FileReading.readTxt("D:/Tesis Lachi David/GitHub Online/SCBEAM-FX/src/icons/expoTypeComboBox.txt")));
+            comboExpos.getSelectionModel().selectFirst();
+            comboReforce.getSelectionModel().selectFirst();
         } catch (IOException e) {
             e.printStackTrace();
         }

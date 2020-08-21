@@ -8,10 +8,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
+public class FileReading {
 
     private File sourceFile;
-    public static Thread thread = new Thread();
     int count = 0;
 
     public FileReading(File sourceFile) {
@@ -20,9 +19,6 @@ public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
 
     public TreeMap<Double, ArrayList<Integer>> readFile () { //only reading from .csv, I need to implements for .xls and .xlsx files
         TreeMap<Double, ArrayList<Integer>> readInput = new TreeMap<>();
-        System.out.println("current thread into file reading method => " + Thread.currentThread().getName());
-        thread.setName(Thread.currentThread().getName());
-        System.out.println("thread name => " + thread.getName() + " status => " + thread.isAlive());
         try {
             CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(sourceFile.toString()), StandardCharsets.ISO_8859_1));
             String[] nextLine;
@@ -30,13 +26,16 @@ public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
 
             while ((nextLine = reader.readNext()) != null) {
                 double time = Double.parseDouble(nextLine[0]);
-                ArrayList<Integer> temperaturesList = new ArrayList<>();
-                count++;
 
-                for (int i = 1; i < nextLine.length; i++) {
-                    temperaturesList.add(Integer.parseInt(nextLine[i]));
-                    readInput.put(time, temperaturesList);
+                if (checkTime(time)) {
+                    ArrayList<Integer> temperaturesList = new ArrayList<>();
                     count++;
+
+                    for (int i = 1; i < nextLine.length; i++) {
+                        temperaturesList.add(Integer.parseInt(nextLine[i]));
+                        readInput.put(time, temperaturesList);
+                        count++;
+                    }
                 }
             }
             reader.close();
@@ -84,13 +83,5 @@ public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
         return list;
     }
 
-    @Override
-    protected TreeMap<Double, ArrayList<Integer>> call() throws Exception {
 
-        updateMessage("Procesando... Hilo => " + Thread.currentThread().getName());
-        TreeMap<Double, ArrayList<Integer>> treeMap = readFile();
-        updateMessage("Terminado... Hilo => " + Thread.currentThread().getName());
-        updateProgress(100, 100);
-        return treeMap;
-    }
 }

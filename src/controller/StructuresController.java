@@ -3,10 +3,14 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXProgressBar;
 import file_management.FileReading;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,11 +57,15 @@ public class StructuresController implements Initializable {
     @FXML
     private JFXListView listMeshedStructures;
 
+    @FXML
+    private JFXProgressBar progressBar;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
         listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getMeshStructures()));
         fileComboBox.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfProcessedFiles()));
+        fileComboBox.getSelectionModel().selectFirst();
     }
 
     public void setMenuController(MenuController menuController) {
@@ -80,13 +88,32 @@ public class StructuresController implements Initializable {
 
     public void meshStructure(ActionEvent event) {
         int indexStructure = listNonMeshedStructures.getSelectionModel().getSelectedIndex();
-        Structure currentStructure = Controller.getSingletonController().getNonMeshedStructures().get(indexStructure);
+        Structure currentStructure = Controller.getSingletonController().getNonMeshedStructures().remove(indexStructure);
         int indexFile = fileComboBox.getSelectionModel().getSelectedIndex();
         File file = Controller.getSingletonController().getProcessedFiles().get(indexFile);
         TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = Controller.getSingletonController().getTimeTemperaturesTreeMap().get((File) file);
 
         BuildBeam buildBeam = new BuildBeam(currentStructure, timeTemperaturesTreeMap);
-        System.out.println("current thread before build mesh => " + Thread.currentThread().getName());
-        buildBeam.start();
+
+        Task<Void> longTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                buildBeam.buildMeshes();
+                return null;
+            }
+        };
+
+        longTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                principalPane.getChildren().remove(progressBar);
+                Controller.getSingletonController().getMeshStructures().add(currentStructure);
+                listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNonMeshedStructures()));
+                listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getMeshStructures()));
+            }
+        });
+
+        progressBar.progressProperty().bind(longTask.progressProperty());
+        new Thread(longTask).start();
     }
 }

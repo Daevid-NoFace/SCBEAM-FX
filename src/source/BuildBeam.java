@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-public class BuildBeam extends Thread {
+public class BuildBeam {
 
 
     private Structure structure;
@@ -80,10 +80,5 @@ public class BuildBeam extends Thread {
         nodes.add(new Node(p4, temperatures.get((int) p4 - 1)));
 
         return new Quadrant(nodes);
-    }
-
-    @Override
-    public void run() {
-        buildMeshes();
     }
 }

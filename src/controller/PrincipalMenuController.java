@@ -5,13 +5,17 @@ import com.opencsv.CSVReader;
 import file_management.FileReading;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import source.Controller;
@@ -31,6 +35,9 @@ public class PrincipalMenuController implements Initializable {
     List<File> loadFiles;
     private TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = new TreeMap<>();
     MenuController menuController;
+
+    @FXML
+    private AnchorPane principalPane;
 
     @FXML
     private JFXTextField textFileName;
@@ -123,29 +130,27 @@ public class PrincipalMenuController implements Initializable {
         File file = Controller.getSingletonController().getUnprocessedFiles().remove(index);
 
         FileReading fileReading = new FileReading(file);
-        System.out.println("current thread before file reading => " + Thread.currentThread().getName());
-        labelLoad.textProperty().bind(fileReading.messageProperty());
 
-        fileReading.setOnRunning((succeesesEvent) -> {
-            progressBar.progressProperty().bind(fileReading.progressProperty());
-            System.out.println("current thread into fileReading.setOnRunning => " + Thread.currentThread().getName());
+        Task<Void> longTask = new Task<Void> () {
+            @Override
+            protected Void call() throws Exception {
+                Controller.getSingletonController().getTimeTemperaturesTreeMap().put(file, fileReading.readFile());
+                return null;
+            }
+        };
+
+        longTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                principalPane.getChildren().remove(progressBar);
+                Controller.getSingletonController().getProcessedFiles().add(file);
+                listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
+                listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
+            }
         });
 
-        fileReading.setOnSucceeded((succeesesEvent) -> {
-            Controller.getSingletonController().getProcessedFiles().add(file);
-            Controller.getSingletonController().getTimeTemperaturesTreeMap().put(file, fileReading.getValue());
-            listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
-            listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
-            System.out.println("current thread into fileReading.setOnSucceeded => " + Thread.currentThread().getName());
-            System.out.println("thread name => " + FileReading.thread.getName() + " status => " + FileReading.thread.isAlive());
-        });
-
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
-        executorService.execute(fileReading);
-        executorService.shutdown();
-
-        System.out.println("current thread after build mesh => " + Thread.currentThread().getName());
-        System.out.println("thread name => " + FileReading.thread.getName() + " status => " + FileReading.thread.isAlive());
+        progressBar.progressProperty().bind(longTask.progressProperty());
+        new Thread(longTask).start();
     }
 
     public void deleteNonProcessedFile(ActionEvent event) {

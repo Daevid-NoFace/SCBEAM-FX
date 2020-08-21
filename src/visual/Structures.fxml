@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -45,5 +46,6 @@
          </font>
       </Label>
       <JFXComboBox fx:id="fileComboBox" layoutX="271.0" layoutY="106.0" prefHeight="31.0" prefWidth="166.0" />
+      <JFXProgressBar fx:id="progressBar" layoutX="14.0" layoutY="695.0" />
    </children>
 </AnchorPane>
