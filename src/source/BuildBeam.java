@@ -8,28 +8,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-public class BuildBeam extends Task<Boolean> {
+public class BuildBeam extends Thread {
 
-    private static BuildBeam singletonBuildBeam;
 
-    private int index;
+    private Structure structure;
     private TreeMap<Double, ArrayList<Integer>> fileReading;
     int count = 0;
-
-    public static BuildBeam getSingletonController() {
-        if (singletonBuildBeam == null)
-            singletonBuildBeam = new BuildBeam();
-
-        return singletonBuildBeam;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 
     public TreeMap<Double, ArrayList<Integer>> getFileReading() {
         return fileReading;
@@ -39,25 +23,16 @@ public class BuildBeam extends Task<Boolean> {
         this.fileReading = fileReading;
     }
 
-    public BuildBeam(int index, TreeMap<Double, ArrayList<Integer>> fileReading) {
-        this.index = index;
+    public BuildBeam(Structure structure, TreeMap<Double, ArrayList<Integer>> fileReading) {
+        this.structure = structure;
         this.fileReading = fileReading;
     }
 
     public BuildBeam() {
     }
 
-    @Override
-    protected Boolean call() throws Exception {
-        updateMessage("Procesando... Hilo => " + Thread.currentThread().getName());
-        boolean mesh = buildMeshes();
-        updateMessage("Terminado... Hilo => " + Thread.currentThread().getName());
-        updateProgress(100, 100);
-        return mesh;
-    }
-
     public boolean buildMeshes () {
-        Structure currentStructure = Controller.getSingletonController().getNonMeshedStructures().get(index);
+
         boolean build = false;
         ArrayList<ArrayList<Quadrant>> rowsOfMesh;
         ArrayList<Quadrant> columnsOfMesh;
@@ -69,46 +44,46 @@ public class BuildBeam extends Task<Boolean> {
             double key = iterator.next();
             int counter = 0;
 
-            while (counter <= currentStructure.getHeight() / GeneralVariables.net - 1) {
+            while (counter <= structure.getHeight() / GeneralVariables.net - 1) {
                 columnsOfMesh = new ArrayList<>();
                 count++;
-                for (int i = 1; i <= currentStructure.getWidth() / GeneralVariables.net; i++) {
-                    columnsOfMesh.add(L_I(currentStructure, i, counter, fileReading.get(key)));
+                for (int i = 1; i <= structure.getWidth() / GeneralVariables.net; i++) {
+                    columnsOfMesh.add(L_I(i, counter, fileReading.get(key)));
                     count++;
                 }
                 counter++;
                 rowsOfMesh.add(columnsOfMesh);
             }
 
-            currentStructure.setTemperatureMeshesAt(key, rowsOfMesh);
+            structure.setTemperatureMeshesAt(key, rowsOfMesh);
 
             if (!iterator.hasNext())
                 build = true;
         }
 
-        Controller.getSingletonController().getMeshStructures().add(index, currentStructure);
+        //Controller.getSingletonController().getMeshStructures().add(structure);
         System.out.println("Iteraciones => " + count);
         return build;
     }
 
-    private Quadrant L_I (Structure currentStructure, int i, int counter, ArrayList<Integer> temperatures) {
+    private Quadrant L_I (int i, int counter, ArrayList<Integer> temperatures) {
+
+        final int p1 = EFSlab.F11(i, counter + 1, (int) (structure.getWidth() / GeneralVariables.net)) + counter;
+        final int p2 = EFSlab.F12(i, counter + 1, (int) (structure.getWidth() / GeneralVariables.net)) + counter;
+        final int p3 = EFSlab.F13(i, counter + 1, (int) (structure.getWidth() / GeneralVariables.net)) + counter;
+        final int p4 = EFSlab.F14(i, counter + 1, (int) (structure.getWidth() / GeneralVariables.net)) + counter;
+
         ArrayList<Node> nodes = new ArrayList<>();
+        nodes.add(new Node(p1, temperatures.get((int) p1 - 1)));
+        nodes.add(new Node(p2, temperatures.get((int) p2 - 1)));
+        nodes.add(new Node(p3, temperatures.get((int) p3 - 1)));
+        nodes.add(new Node(p4, temperatures.get((int) p4 - 1)));
 
-        final int p1 = EFSlab.F11(i, counter + 1, (int) (currentStructure.getWidth() / GeneralVariables.net)) + counter;
-        Node node1 = new Node(p1, temperatures.get((int) p1 - 1));
-        final int p2 = EFSlab.F12(i, counter + 1, (int) (currentStructure.getWidth() / GeneralVariables.net)) + counter;
-        Node node2 = new Node(p2, temperatures.get((int) p2 - 1));
-        final int p3 = EFSlab.F13(i, counter + 1, (int) (currentStructure.getWidth() / GeneralVariables.net)) + counter;
-        Node node3 = new Node(p3, temperatures.get((int) p3 - 1));
-        final int p4 = EFSlab.F14(i, counter + 1, (int) (currentStructure.getWidth() / GeneralVariables.net)) + counter;
-        Node node4 = new Node(p4, temperatures.get((int) p4 - 1));
-        final double prom = (node1.getTemperature() + node2.getTemperature() + node3.getTemperature() + node4.getTemperature()) / 4;
+        return new Quadrant(nodes);
+    }
 
-        nodes.add(node1);
-        nodes.add(node2);
-        nodes.add(node3);
-        nodes.add(node4);
-
-        return new Quadrant(nodes, prom);
+    @Override
+    public void run() {
+        buildMeshes();
     }
 }
