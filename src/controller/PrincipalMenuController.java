@@ -83,6 +83,7 @@ public class PrincipalMenuController implements Initializable {
         listLoadFiles.setItems(FXCollections.observableList(files));
         listLoadFiles.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
+        labelLoad.setVisible(false);
     }
 
     public void setMenuController(MenuController menuController) {
@@ -131,6 +132,8 @@ public class PrincipalMenuController implements Initializable {
 
         FileReading fileReading = new FileReading(file);
 
+        labelLoad.setVisible(true);
+
         Task<Void> longTask = new Task<Void> () {
             @Override
             protected Void call() throws Exception {
@@ -143,6 +146,8 @@ public class PrincipalMenuController implements Initializable {
             @Override
             public void handle(WorkerStateEvent event) {
                 principalPane.getChildren().remove(progressBar);
+                labelLoad.setText("Finalizado");
+                principalPane.getChildren().remove(labelLoad);
                 Controller.getSingletonController().getProcessedFiles().add(file);
                 listLoadFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getUnprocessedFiles()));
                 listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
@@ -151,6 +156,7 @@ public class PrincipalMenuController implements Initializable {
 
         progressBar.progressProperty().bind(longTask.progressProperty());
         new Thread(longTask).start();
+        labelLoad.setText("Cargando");
     }
 
     public void deleteNonProcessedFile(ActionEvent event) {

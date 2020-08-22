@@ -54,7 +54,16 @@ public class FileReading {
         if (time == GeneralVariables.t0 || time == GeneralVariables.t5 || time == GeneralVariables.t10 ||
                 time == GeneralVariables.t15 || time == GeneralVariables.t20 || time == GeneralVariables.t25||
                 time == GeneralVariables.t30 || time == GeneralVariables.t35 || time == GeneralVariables.t40 ||
-                time == GeneralVariables.t45 || time == GeneralVariables.t60) {
+                time == GeneralVariables.t45 || time == GeneralVariables.t50 || time == GeneralVariables.t55 ||
+                time == GeneralVariables.t60 || time == GeneralVariables.t65 || time == GeneralVariables.t70 ||
+                time == GeneralVariables.t75 || time == GeneralVariables.t80 || time == GeneralVariables.t85 ||
+                time == GeneralVariables.t90 || time == GeneralVariables.t95 || time == GeneralVariables.t100 ||
+                time == GeneralVariables.t105 || time == GeneralVariables.t110 || time == GeneralVariables.t115 ||
+                time == GeneralVariables.t120 || time == GeneralVariables.t125 || time == GeneralVariables.t130 ||
+                time == GeneralVariables.t135 || time == GeneralVariables.t140 || time == GeneralVariables.t145 ||
+                time == GeneralVariables.t150 || time == GeneralVariables.t155 || time == GeneralVariables.t160 ||
+                time == GeneralVariables.t165 || time == GeneralVariables.t170 || time == GeneralVariables.t175 ||
+                time == GeneralVariables.t180) {
             check = true;
         } else {
             check = false;

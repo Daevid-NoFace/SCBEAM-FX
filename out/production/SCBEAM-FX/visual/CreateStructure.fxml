@@ -44,17 +44,17 @@
             <Font name="Segoe UI Bold" size="16.0" />
          </font>
       </Label>
-      <Spinner fx:id="spinnerWidth" editable="true" layoutX="179.0" layoutY="109.0" onMouseClicked="#handleSpinnerClicks" prefHeight="31.0" prefWidth="82.0">
+      <Spinner fx:id="spinnerWidth" editable="true" layoutX="179.0" layoutY="109.0" prefHeight="31.0" prefWidth="82.0">
       <valueFactory>
          <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="0.5" initialValue="35" max="500" min="0" />
       </valueFactory>
       </Spinner>
-      <Spinner fx:id="spinnerHeight" layoutX="179.0" layoutY="152.0" onMouseClicked="#handleSpinnerClicks" prefHeight="31.0" prefWidth="82.0">
+      <Spinner fx:id="spinnerHeight" layoutX="179.0" layoutY="152.0" prefHeight="31.0" prefWidth="82.0">
       <valueFactory>
          <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="0.5" initialValue="65" max="500" min="0" />
       </valueFactory>
       </Spinner>
-      <Spinner fx:id="spinnerCovering" layoutX="179.0" layoutY="206.0" onMouseClicked="#handleSpinnerClicks" prefHeight="31.0" prefWidth="82.0">
+      <Spinner fx:id="spinnerCovering" layoutX="179.0" layoutY="206.0" prefHeight="31.0" prefWidth="82.0">
          <valueFactory>
             <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="0.5" initialValue="3" max="500" min="0" />
          </valueFactory>

@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import source.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,14 +24,14 @@ public class MenuController  implements Initializable {
     private JFXButton structureBtn;
 
     @FXML
-    private JFXButton helpBtn;
+    private JFXButton calculationsBtn;
 
     @FXML
     private AnchorPane principalPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Controller.getSingletonController().structureTest();
     }
 
     public AnchorPane getPrincipalPane() {
@@ -67,6 +68,17 @@ public class MenuController  implements Initializable {
         }
     }
 
+    public void showCalculationsMenu(ActionEvent event) {
+        try{
+            createPage(new CalculationsController(), principalPane, "/visual/Calculations.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Calculations Menu");
+        }
+
+    }
+
     public void createPage(Object instance, AnchorPane home, String loc) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MenuController.class.getResource(loc));
@@ -81,6 +93,9 @@ public class MenuController  implements Initializable {
         } else if (instance instanceof PrincipalMenuController) {
             instance = loader.getController();
             ((PrincipalMenuController) instance).setMenuController(this);
+        } else if (instance instanceof CalculationsController) {
+            instance = loader.getController();
+            ((CalculationsController) instance).setMenuController(this);
         }
 
         setNode(home);

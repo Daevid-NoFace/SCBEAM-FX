@@ -182,7 +182,14 @@ public class CreateStructureController implements Initializable {
         double tensionStrength = spinnerLimitTransversal.getValue();
         System.out.println("cross reinforcement tensile strength => " + tensionStrength);
 
-        newStructure.getCrossBars().add(new Bar(diameter, tensionStrength, 1, 'd', 'v'));
+        //newStructure.getCrossBars().add(new Bar(diameter, tensionStrength, 1, 'd', 'v'));
+        Bar newCrossBar = new Bar(diameter, tensionStrength, 1, 'd', 'v');
+        if (newStructure.fitsBarInLitter(newCrossBar)) {
+            newStructure.getCrossBars().add(newCrossBar);
+        } else {
+            newStructure.getCrossBars().add(newCrossBar);
+            System.out.println("new lit added");
+        }
 
         //show data in text area
         textAreaStructureData.clear();
@@ -206,6 +213,7 @@ public class CreateStructureController implements Initializable {
         textAreaStructureData.appendText("      Exposure Type " + newStructure.getLongitudinalBar().getExposureType() + "\n");
         textAreaStructureData.appendText("      Fiber Type " + newStructure.getLongitudinalBar().getFiberType() +  "\n");
         textAreaStructureData.appendText("Cross Reinforcement" + "\n");
+        textAreaStructureData.appendText("Number of lit" + newStructure.getNumberOfLitters() + "\n");
         textAreaStructureData.appendText("Number of bars " + newStructure.getCrossBars().size() + " bar(s)" + "\n");
         textAreaStructureData.appendText("      Diameter " + newStructure.getLongitudinalBar().getDiameter() + "\n");
         textAreaStructureData.appendText("      Covering " + newStructure.getLongitudinalBar().getTensileStrength() + " MPa" +  "\n");
@@ -216,12 +224,5 @@ public class CreateStructureController implements Initializable {
     public void createStructure(ActionEvent event) {
         Controller.getSingletonController().getNonMeshedStructures().add(newStructure);
         System.out.println("Estructura creada. Tamano de lista Estructuras no malladas => " + Controller.getSingletonController().getNonMeshedStructures().size());
-    }
-
-    public void handleSpinnerClicks(MouseEvent event) {
-
-        if (event.getSource() == btnCreateGeometricStructure) {
-
-        }
     }
 }

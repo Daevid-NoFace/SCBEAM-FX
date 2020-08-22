@@ -119,4 +119,23 @@ public class Controller {
 
     //OTHER METHODS
 
+    public void structureTest() {
+        Structure structureTest = new Structure("35x65prueba", 35.0, 65.0);
+        structureTest.setCovering(3);
+        structureTest.setNumberOfLitters((short) 1);
+        structureTest.setCompressiveStrengthOfConcrete(25);
+        structureTest.setFenceSpacing(24);
+
+        Bar longitudinalBarTest = new Bar(1, 800, 50000, 'p', 'v');
+
+        Bar crossBarTest1 = new Bar(1.6, 800, 50000, 'p', 'v');
+        Bar crossBarTest2 = new Bar(1.6, 800, 50000, 'p', 'v');
+
+        structureTest.setLongitudinalBar(longitudinalBarTest);
+        structureTest.getCrossBars().add(crossBarTest1);
+        structureTest.getCrossBars().add(crossBarTest2);
+
+        getNonMeshedStructures().add(structureTest);
+    }
+
 }

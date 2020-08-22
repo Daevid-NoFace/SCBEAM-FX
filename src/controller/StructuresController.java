@@ -63,9 +63,10 @@ public class StructuresController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
-        listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getMeshStructures()));
+        listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfMeshedStructures()));
         fileComboBox.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfProcessedFiles()));
         fileComboBox.getSelectionModel().selectFirst();
+        progressBar.setVisible(false);
     }
 
     public void setMenuController(MenuController menuController) {
@@ -93,7 +94,7 @@ public class StructuresController implements Initializable {
         File file = Controller.getSingletonController().getProcessedFiles().get(indexFile);
         TreeMap<Double, ArrayList<Integer>> timeTemperaturesTreeMap = Controller.getSingletonController().getTimeTemperaturesTreeMap().get((File) file);
 
-        BuildBeam buildBeam = new BuildBeam(currentStructure, timeTemperaturesTreeMap);
+        BuildBeam buildBeam = new BuildBeam(currentStructure, timeTemperaturesTreeMap); //this could be an static method
 
         Task<Void> longTask = new Task<Void>() {
             @Override
@@ -108,11 +109,11 @@ public class StructuresController implements Initializable {
             public void handle(WorkerStateEvent event) {
                 principalPane.getChildren().remove(progressBar);
                 Controller.getSingletonController().getMeshStructures().add(currentStructure);
-                listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNonMeshedStructures()));
-                listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getMeshStructures()));
+                listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
+                listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfMeshedStructures()));
             }
         });
-
+        progressBar.setVisible(true);
         progressBar.progressProperty().bind(longTask.progressProperty());
         new Thread(longTask).start();
     }

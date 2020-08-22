@@ -72,4 +72,41 @@ public class Bar {
     public void setTime_quadrantList_TreeMap(TreeMap<Double, ArrayList<Quadrant>> time_quadrantList_TreeMap) {
         this.time_quadrantList_TreeMap = time_quadrantList_TreeMap;
     }
+
+    //other methods
+    public double getCurrentTensileStrength () {
+        double ce = 0;
+
+        if (exposureType == 'p') {
+            switch (fiberType) {
+                case 'c':
+                    ce = 1;
+                    break;
+                case 'v':
+                    ce = 0.8;
+                    break;
+                case 'a':
+                    ce = 0.9;
+                    break;
+                default:
+                    break;
+            }
+        } else if (exposureType == 'e') {
+            switch (fiberType) {
+                case 'c':
+                    ce = 0.9;
+                    break;
+                case 'v':
+                    ce = 0.7;
+                    break;
+                case 'a':
+                    ce = 0.8;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return this.tensileStrength * ce;
+    }
 }
