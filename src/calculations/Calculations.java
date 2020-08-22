@@ -58,7 +58,7 @@ public class Calculations {
 
         double ke = structure.KeCalculation(time, methodType);
 
-        double Nf = (5000 * ke) / EprimaC;
+        double Nf = (50000 * ke) / EprimaC;
 
         double Ks = Math.sqrt(Math.pow(Nf * Rof, 2) + 2 * Nf * Rof) - Nf * Rof;
 
@@ -91,7 +91,7 @@ public class Calculations {
         ArrayList<Double> dfs = new ArrayList<>();
 
         for (Bar crossBar: structure.getCrossBars()) {
-            double d = structure.getCovering() + structure.getLongitudinalBar().getDiameter() + crossBar.getDiameter();
+            double d = structure.getCovering() + structure.getLongitudinalBar().getDiameter() + crossBar.getDiameter() / 2;
 
             dfs.add(d);
         }

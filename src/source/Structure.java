@@ -170,7 +170,7 @@ public class Structure {
     }
 
     public void setNewWidth(double indexTime) {
-        int numberOfQuadrantsAcross = (int) (this.width / GeneralVariables.net);
+        double numberOfQuadrantsAcross = (this.width / GeneralVariables.net);
         int counter = 0;
 
         ArrayList<ArrayList<Quadrant>> mesh = this.temperatureMeshes.get((double) indexTime);
@@ -189,7 +189,7 @@ public class Structure {
         double totalArea = 0;
 
         for (Bar crossBar: crossBars)
-            totalArea += Math.pow(crossBar.getDiameter() / 2, 2);
+            totalArea += Math.pow(crossBar.getDiameter() / 2, 2) * Math.PI;
 
         return totalArea;
     }

@@ -83,6 +83,7 @@ public class PrincipalMenuController implements Initializable {
         listLoadFiles.setItems(FXCollections.observableList(files));
         listLoadFiles.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listProcessedFiles.setItems(FXCollections.observableList(Controller.getSingletonController().getProcessedFiles()));
+        textFileName.setText("C:\\Users\\DaVid\\Documents\\viga 35x70.csv");
         labelLoad.setVisible(false);
     }
 

@@ -121,7 +121,7 @@ public class Controller {
 
     public void structureTest() {
         Structure structureTest = new Structure("35x65prueba", 35.0, 65.0);
-        structureTest.setCovering(3);
+        structureTest.setCovering(5);
         structureTest.setNumberOfLitters((short) 1);
         structureTest.setCompressiveStrengthOfConcrete(25);
         structureTest.setFenceSpacing(24);

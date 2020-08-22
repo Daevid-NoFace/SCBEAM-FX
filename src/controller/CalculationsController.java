@@ -7,6 +7,8 @@ import com.jfoenix.controls.JFXRadioButton;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import source.Controller;
@@ -30,13 +32,7 @@ public class CalculationsController implements Initializable {
     private JFXButton backBtn;
 
     @FXML
-    private JFXRadioButton radioBtnMethodP;
-
-    @FXML
-    private JFXRadioButton radioBtnAverageMethod;
-
-    @FXML
-    private TableView tableResults;
+    private LineChart<String, Number> lineChart;
 
     @FXML
     private JFXButton btnCalculate;
@@ -53,6 +49,7 @@ public class CalculationsController implements Initializable {
     public void calculateBtn(javafx.event.ActionEvent event) {
         TreeMap<Double, ArrayList<Double>> timeVsResults = Calculations.cuttingMethod(Controller.getSingletonController().getMeshStructures().get(structuresMeshedList.getSelectionModel().getSelectedIndex()), 'p');
 
+        /*
         for(Map.Entry<Double, ArrayList<Double>> entry : timeVsResults.entrySet()) {
             Double key = entry.getKey();
             ArrayList<Double> values = entry.getValue();
@@ -60,5 +57,26 @@ public class CalculationsController implements Initializable {
             System.out.println("Time => " + key * 60 + " minutes");
             System.out.println("    Values => Vc: " + values.get(0) + " Vfv: " + values.get(1) + " Vn: " + values.get(2));
         }
+
+        for(Map.Entry<Double, ArrayList<Double>> entry : timeVsResults.entrySet()) {
+            Double key = entry.getKey();
+            ArrayList<Double> values = entry.getValue();
+
+            series.getData().add(new XYChart.Data(key, values.get(2)));
+        }
+         */
+
+        XYChart.Series<String, Number> series = new XYChart.Series();
+        series.setName(Controller.getSingletonController().getMeshStructures().get(structuresMeshedList.getSelectionModel().getSelectedIndex()).getId());
+        
+        for (Map.Entry<Double, ArrayList<Double>> entry : timeVsResults.entrySet()) {
+            Double key = entry.getKey();
+            ArrayList<Double> values = entry.getValue();
+
+            series.getData().add(new XYChart.Data<String, Number>(String.valueOf(key), values.get(2)));
+
+
+        }
+        lineChart.getData().add(series);
     }
 }
