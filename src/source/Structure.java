@@ -181,8 +181,10 @@ public class Structure {
             if (mesh.get(midpointOfHeight).get(i).calculateTemperature() >= 500)
                 counter++;
 
-        setWidth((numberOfQuadrantsAcross - counter * 2) * GeneralVariables.net);
-        setWidthDifference(counter);
+        System.out.println("count => " + counter);
+        System.out.println("new width => " + ((numberOfQuadrantsAcross - counter) * GeneralVariables.net));
+        setWidth((numberOfQuadrantsAcross - counter) * GeneralVariables.net);
+        setWidthDifference(counter / 2);
     }
 
     public double getTotalCrossbarsArea() {
@@ -204,6 +206,8 @@ public class Structure {
             averageTemperature = temperatureMeshes.get((double) indexTime).get((int) (this.effectiveHeight / GeneralVariables.net)).get((int) (this.covering / GeneralVariables.net)).calculateTemperature();
         }
 
+        System.out.println("temperature Ke " + averageTemperature);
+
         if (averageTemperature >= 0 && averageTemperature <= 100)
             Ke = 1;
         else if (averageTemperature > 100 && averageTemperature <= 300)
@@ -212,7 +216,7 @@ public class Structure {
             Ke = (2.0 - 0.005 * averageTemperature);
         else if (averageTemperature > 400)
             Ke = 0;
-
+        System.out.println("Ke " + Ke);
         return Ke;
     }
 
@@ -226,11 +230,13 @@ public class Structure {
             averageTemperature = temperatureMeshes.get((double) indexTime).get((int) (this.effectiveHeight / GeneralVariables.net)).get((int) (this.covering / GeneralVariables.net)).calculateTemperature();
         }
 
+        System.out.println("temperature Kf " + averageTemperature);
+
         if (averageTemperature >= 0 && averageTemperature <= 400)
             Kf = (1 - 0.0025 * averageTemperature);
         else
             Kf = 0;
-
+        System.out.println("Kf " + Kf);
         return Kf;
     }
 }

@@ -18,6 +18,7 @@ public class Calculations {
 
         for(Map.Entry<Double, ArrayList<ArrayList<Quadrant>>> entry : temperatureMeshes.entrySet()) {
             double key = entry.getKey();
+            System.out.println("Time = " + key);
             results = new ArrayList<>();
 
             if (key == 0.0000 && methodType == 'p') {

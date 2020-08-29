@@ -49,7 +49,7 @@ public class CalculationsController implements Initializable {
     public void calculateBtn(javafx.event.ActionEvent event) {
         TreeMap<Double, ArrayList<Double>> timeVsResults = Calculations.cuttingMethod(Controller.getSingletonController().getMeshStructures().get(structuresMeshedList.getSelectionModel().getSelectedIndex()), 'p');
 
-        /*
+
         for(Map.Entry<Double, ArrayList<Double>> entry : timeVsResults.entrySet()) {
             Double key = entry.getKey();
             ArrayList<Double> values = entry.getValue();
@@ -57,26 +57,30 @@ public class CalculationsController implements Initializable {
             System.out.println("Time => " + key * 60 + " minutes");
             System.out.println("    Values => Vc: " + values.get(0) + " Vfv: " + values.get(1) + " Vn: " + values.get(2));
         }
-
+/*
         for(Map.Entry<Double, ArrayList<Double>> entry : timeVsResults.entrySet()) {
             Double key = entry.getKey();
             ArrayList<Double> values = entry.getValue();
 
             series.getData().add(new XYChart.Data(key, values.get(2)));
         }
-         */
+
 
         XYChart.Series<String, Number> series = new XYChart.Series();
+        XYChart.Series<String, Number> series2 = new XYChart.Series();
         series.setName(Controller.getSingletonController().getMeshStructures().get(structuresMeshedList.getSelectionModel().getSelectedIndex()).getId());
-        
+        series2.setName("Hola Mundo");
+
         for (Map.Entry<Double, ArrayList<Double>> entry : timeVsResults.entrySet()) {
             Double key = entry.getKey();
             ArrayList<Double> values = entry.getValue();
 
             series.getData().add(new XYChart.Data<String, Number>(String.valueOf(key), values.get(2)));
 
-
+            series2.getData().add(new XYChart.Data<String, Number>(String.valueOf(key), values.get(1)));
         }
         lineChart.getData().add(series);
+        lineChart.getData().add(series2);
+        */
     }
 }

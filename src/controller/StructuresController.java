@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import source.BuildBeam;
 import source.Controller;
+import source.Quadrant;
 import source.Structure;
 
 import java.io.File;
@@ -111,10 +112,26 @@ public class StructuresController implements Initializable {
                 Controller.getSingletonController().getMeshStructures().add(currentStructure);
                 listNonMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfNonMeshedStructures()));
                 listMeshedStructures.setItems(FXCollections.observableList(Controller.getSingletonController().getNamesOfMeshedStructures()));
+                showMesh();
             }
         });
         progressBar.setVisible(true);
         progressBar.progressProperty().bind(longTask.progressProperty());
         new Thread(longTask).start();
+    }
+
+    private void showMesh() {
+        Structure structure = Controller.getSingletonController().getMeshStructures().get(0);
+        ArrayList<ArrayList<Quadrant>> array = structure.getTemperatureMeshes().get(0.5000);
+
+        for (int i = 0; i < array.size(); i++) {
+            System.out.println("Fila => " + (i + 1));
+            ArrayList<Quadrant> array2 = array.get(i);
+            for (int j = 0; j < array2.size(); j++) {
+                System.out.print("Columna => " + (j + 1));
+                System.out.print(" " + array2.get(j).calculateTemperature() + " ");
+            }
+            System.out.println("\n");
+        }
     }
 }
