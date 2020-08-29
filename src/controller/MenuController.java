@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import source.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,20 +24,24 @@ public class MenuController  implements Initializable {
     private JFXButton structureBtn;
 
     @FXML
-    private JFXButton helpBtn;
+    private JFXButton calculationsBtn;
 
     @FXML
     private AnchorPane principalPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Controller.getSingletonController().structureTest();
+    }
 
+    public AnchorPane getPrincipalPane() {
+        return this.principalPane;
     }
 
     @FXML
     void showPrincipalMenu(ActionEvent event) {
         try {
-            this.createPage(principalPane, "/visual/PrincipalMenu.fxml");
+            this.createPage(new PrincipalMenuController(), principalPane, "/visual/PrincipalMenu.fxml");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -45,16 +50,60 @@ public class MenuController  implements Initializable {
     @FXML
     void showStructuresMenu(ActionEvent event) {
         try {
-            this.createPage(principalPane,  "/visual/CreateStructure.fxml");
+
+            createPage(new StructuresController(), principalPane, "/visual/Structures.fxml");
+            /*
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MenuController.class.getResource("/visual/Structures.fxml"));
+            AnchorPane ap = loader.load();
+            StructuresController structuresController = loader.getController();
+            structuresController.setMenuController(this);
+            //this.createPage(principalPane,  "/visual/Structures.fxml");
+            this.setNode(ap);
+
+             */
+
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    public void showCalculationsMenu(ActionEvent event) {
+        try{
+            createPage(new CalculationsController(), principalPane, "/visual/Calculations.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Calculations Menu");
+        }
+
+    }
+
+    public void createPage(Object instance, AnchorPane home, String loc) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MenuController.class.getResource(loc));
+        home = loader.load();
+
+        if (instance instanceof StructuresController) {
+            instance = loader.getController();
+            ((StructuresController) instance).setMenuController(this);
+        } else if (instance instanceof CreateStructureController) {
+            instance = loader.getController();
+            ((CreateStructureController) instance).setMenuController(this);
+        } else if (instance instanceof PrincipalMenuController) {
+            instance = loader.getController();
+            ((PrincipalMenuController) instance).setMenuController(this);
+        } else if (instance instanceof CalculationsController) {
+            instance = loader.getController();
+            ((CalculationsController) instance).setMenuController(this);
+        }
+
+        setNode(home);
+    }
 
     public void setNode(Node node) {
         principalPane.getChildren().clear();
-        principalPane.getChildren().add((Node) node);
+        principalPane.getChildren().add(node);
         FadeTransition ft = new FadeTransition(Duration.millis(2000));
         ft.setNode(node);
         ft.setFromValue(0.1);
@@ -63,11 +112,4 @@ public class MenuController  implements Initializable {
         ft.setAutoReverse(false);
         ft.play();
     }
-
-
-    public void createPage(AnchorPane home, String loc) throws IOException {
-        home = FXMLLoader.load(getClass().getResource(loc));
-        setNode(home);
-    }
-
 }

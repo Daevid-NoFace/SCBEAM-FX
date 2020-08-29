@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="735.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalMenuController">
+<AnchorPane fx:id="principalPane" prefHeight="729.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalMenuController">
    <children>
       <Label layoutX="14.0" layoutY="46.0" text="Cargar Ficheros:">
          <font>
@@ -38,7 +38,7 @@
          </font>
       </Label>
       <JFXListView fx:id="listLoadFiles" layoutX="14.0" layoutY="219.0" prefHeight="400.0" prefWidth="307.0" />
-      <JFXProgressBar fx:id="progressBar" layoutX="14.0" layoutY="674.0" prefHeight="12.0" prefWidth="257.0" progress="0.5" />
+      <JFXProgressBar fx:id="progressBar" layoutX="14.0" layoutY="674.0" prefHeight="12.0" prefWidth="257.0" progress="0.0" />
       <Label fx:id="labelLoad" layoutX="14.0" layoutY="697.0" text="Cargando">
          <font>
             <Font name="Segoe UI Bold" size="16.0" />
@@ -61,5 +61,27 @@
          </cursor>
       </JFXButton>
       <JFXListView fx:id="listProcessedFiles" layoutX="331.0" layoutY="82.0" prefHeight="538.0" prefWidth="361.0" />
+      <JFXButton fx:id="btnDeleteNonProcessedFile" buttonType="RAISED" layoutX="168.0" layoutY="626.0" onAction="#deleteNonProcessedFile" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #d00000;" text="Eliminar" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnDeleteProcessedFile" buttonType="RAISED" layoutX="331.0" layoutY="626.0" onAction="#deleteProcessedFile" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: #d00000;" text="Eliminar" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnContinue" buttonType="RAISED" contentDisplay="RIGHT" layoutX="575.0" layoutY="624.0" onAction="#continueAction" prefHeight="35.0" prefWidth="117.0" style="-fx-background-color: #0096c7;" text="Continuar" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@../icons/icons8-left-50.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

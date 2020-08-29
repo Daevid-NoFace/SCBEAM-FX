@@ -18,13 +18,16 @@ public class Structure {
     private double covering;
     private double compressiveStrengthOfConcrete;
     private double fenceSpacing;
-    private LongitudinalBar longitudinalBar;
-    private ArrayList<CrossBar> crossBars;
+    private Bar longitudinalBar;
+    private ArrayList<Bar> crossBars;
     private TreeMap<Double, ArrayList<ArrayList<Quadrant>>> temperatureMeshes;  //K = time, V = matrix of quadrants
 
     public Structure() {
         super();
         this.crossBars = new ArrayList<>();
+        longitudinalBar = new Bar();
+        crossBars =  new ArrayList<>();
+        temperatureMeshes = new TreeMap<>();
     }
 
     public Structure(String id, double width, double height) {
@@ -38,7 +41,9 @@ public class Structure {
         this.fenceSpacing = 0;
         this.covering = 0;
         this.compressiveStrengthOfConcrete = 0;
+        this.longitudinalBar = new Bar();
         this.crossBars = new ArrayList<>();
+        this.temperatureMeshes = new TreeMap<>();
     }
 
     public String getId() {
@@ -113,19 +118,19 @@ public class Structure {
         this.fenceSpacing = fenceSpacing;
     }
 
-    public LongitudinalBar getLongitudinalBar() {
+    public Bar getLongitudinalBar() {
         return longitudinalBar;
     }
 
-    public void setLongitudinalBar(LongitudinalBar longitudinalBar) {
+    public void setLongitudinalBar(Bar longitudinalBar) {
         this.longitudinalBar = longitudinalBar;
     }
 
-    public ArrayList<CrossBar> getCrossBars() {
+    public ArrayList<Bar> getCrossBars() {
         return crossBars;
     }
 
-    public void setCrossBars(ArrayList<CrossBar> crossBars) {
+    public void setCrossBars(ArrayList<Bar> crossBars) {
         this.crossBars = crossBars;
     }
 
@@ -142,56 +147,96 @@ public class Structure {
     }
 
     //**************others methods**************\\
+    public boolean fitsBarInLitter(Bar newCrossBar) {
+        boolean lit = false;
 
-    public boolean buildMeshes (TreeMap<Double, ArrayList<Integer>> fileReading) {
-        boolean build = false;
-        ArrayList<ArrayList<Quadrant>> rowsOfMesh;
-        ArrayList<Quadrant> columnsOfMesh;
-        Iterator<Double> iterator = fileReading.keySet().iterator();
+        //Sh es la diferencia minima entre barras por camada
+        double Sh = (this.width - 2 * covering - 2 * newCrossBar.getDiameter()
+                - ((crossBars.size() + 1) * newCrossBar.getDiameter())) / (crossBars.size());
 
-        while (iterator.hasNext()) {
-
-            rowsOfMesh = new ArrayList<>();
-            double key = iterator.next();
-            int counter = 0;
-
-            while (counter <= getHeight() / GeneralVariables.net - 1) {
-                columnsOfMesh = new ArrayList<>();
-
-                for (int i = 1; i <= getWidth() / GeneralVariables.net; i++)
-                    columnsOfMesh.add(L_I(i, counter, key, fileReading.get(key)));
-
-                counter++;
-                rowsOfMesh.add(columnsOfMesh);
-            }
-
-            setTemperatureMeshesAt(key, rowsOfMesh);
-
-            if (!iterator.hasNext())
-                build = true;
+        if (Sh >= 2) {
+            lit = true;
+        } else {
+            lit = false;
+            this.numberOfLitters++;
         }
 
-        return build;
+        return lit;
     }
 
-    private Quadrant L_I (int i, int counter, double key, ArrayList<Integer> temperatures) {
-        ArrayList<Node> nodos = new ArrayList<>();
+    public void setOriginalWidth() {
+        setWidth(this.widthDifference + this.width);
+        this.widthDifference = 0;
+    }
 
-        final int p1 = EFSlab.F11(i, counter + 1, (int) (getWidth() / GeneralVariables.net)) + counter;
-        Node node1 = new Node(p1, temperatures.get((int) p1 - 1));
-        final int p2 = EFSlab.F12(i, counter + 1, (int) (getWidth() / GeneralVariables.net)) + counter;
-        Node node2 = new Node(p2, temperatures.get((int) p2 - 1));
-        final int p3 = EFSlab.F13(i, counter + 1, (int) (getWidth() / GeneralVariables.net)) + counter;
-        Node node3 = new Node(p3, temperatures.get((int) p3 - 1));
-        final int p4 = EFSlab.F14(i, counter + 1, (int) (getWidth() / GeneralVariables.net)) + counter;
-        Node node4 = new Node(p4, temperatures.get((int) p4 - 1));
-        final double prom = (node1.getTemperature() + node2.getTemperature() + node3.getTemperature() + node4.getTemperature()) / 4;
+    public void setNewWidth(double indexTime) {
+        double numberOfQuadrantsAcross = (this.width / GeneralVariables.net);
+        int counter = 0;
 
-        nodos.add(node1);
-        nodos.add(node2);
-        nodos.add(node3);
-        nodos.add(node4);
+        ArrayList<ArrayList<Quadrant>> mesh = this.temperatureMeshes.get((double) indexTime);
 
-        return new Quadrant(nodos, prom);
+        int midpointOfHeight = (int) (this.height / 2 / GeneralVariables.net);
+
+        for (int i = 0; i < numberOfQuadrantsAcross; i++)
+            if (mesh.get(midpointOfHeight).get(i).calculateTemperature() >= 500)
+                counter++;
+
+        System.out.println("count => " + counter);
+        System.out.println("new width => " + ((numberOfQuadrantsAcross - counter) * GeneralVariables.net));
+        setWidth((numberOfQuadrantsAcross - counter) * GeneralVariables.net);
+        setWidthDifference(counter / 2);
+    }
+
+    public double getTotalCrossbarsArea() {
+        double totalArea = 0;
+
+        for (Bar crossBar: crossBars)
+            totalArea += Math.pow(crossBar.getDiameter() / 2, 2) * Math.PI;
+
+        return totalArea;
+    }
+
+    public double KeCalculation(double indexTime, char methodType) {
+        double Ke = -1;
+        double averageTemperature = -1;
+
+        if (methodType == 'a') {
+            System.out.println("Average method");
+        } else {
+            averageTemperature = temperatureMeshes.get((double) indexTime).get((int) (this.effectiveHeight / GeneralVariables.net)).get((int) (this.covering / GeneralVariables.net)).calculateTemperature();
+        }
+
+        System.out.println("temperature Ke " + averageTemperature);
+
+        if (averageTemperature >= 0 && averageTemperature <= 100)
+            Ke = 1;
+        else if (averageTemperature > 100 && averageTemperature <= 300)
+            Ke = (1.25 - 0.0025 * averageTemperature);
+        else if (averageTemperature > 300 && averageTemperature <= 400)
+            Ke = (2.0 - 0.005 * averageTemperature);
+        else if (averageTemperature > 400)
+            Ke = 0;
+        System.out.println("Ke " + Ke);
+        return Ke;
+    }
+
+    public double KfCalculation(double indexTime, char methodType) {
+        double Kf = -1;
+        double averageTemperature = -1;
+
+        if (methodType == 'a') {
+            System.out.println("Average method");
+        } else {
+            averageTemperature = temperatureMeshes.get((double) indexTime).get((int) (this.effectiveHeight / GeneralVariables.net)).get((int) (this.covering / GeneralVariables.net)).calculateTemperature();
+        }
+
+        System.out.println("temperature Kf " + averageTemperature);
+
+        if (averageTemperature >= 0 && averageTemperature <= 400)
+            Kf = (1 - 0.0025 * averageTemperature);
+        else
+            Kf = 0;
+        System.out.println("Kf " + Kf);
+        return Kf;
     }
 }
