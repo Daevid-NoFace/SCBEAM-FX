@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="735.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+   <children>
+      <AnchorPane prefHeight="735.0" prefWidth="262.0" style="-fx-background-color: #ff8000;">
+         <children>
+            <JFXButton fx:id="principalBtn" buttonType="RAISED" layoutX="37.0" layoutY="192.0" onAction="#showPrincipalMenu" prefHeight="51.0" prefWidth="199.0" ripplerFill="WHITE" stylesheets="@../styles/ApplicationStyle.css" text="Principal" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="structureBtn" buttonType="RAISED" layoutX="37.0" layoutY="280.0" onAction="#showStructuresMenu" prefHeight="51.0" prefWidth="199.0" ripplerFill="WHITE" stylesheets="@../styles/ApplicationStyle.css" text="Estructuras" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="helpBtn" buttonType="RAISED" layoutX="37.0" layoutY="368.0" prefHeight="51.0" prefWidth="199.0" ripplerFill="WHITE" stylesheets="@../styles/ApplicationStyle.css" text="Ayuda" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="principalPane" layoutX="262.0" prefHeight="735.0" prefWidth="927.0" />
+   </children>
+</AnchorPane>

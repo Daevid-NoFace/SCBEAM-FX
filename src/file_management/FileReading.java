@@ -1,41 +1,50 @@
 package file_management;
 
 import auxiliar_source.GeneralVariables;
+import com.opencsv.CSVReader;
+import javafx.concurrent.Task;
 import source.Quadrant;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import javax.swing.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-public class FileReading {
+public class FileReading extends Task<TreeMap<Double, ArrayList<Integer>>> {
 
-    private static StringTokenizer stringTokenizer;
+    private File sourceFile;
 
-    public static TreeMap<Double, ArrayList<Integer>> readFile (String sourceFolder) throws Exception { //only reading from .csv, I need to implements for .xls and .xlsx files
+    public FileReading(File sourceFile) {
+        this.sourceFile = sourceFile;
+    }
+
+    public TreeMap<Double, ArrayList<Integer>> readFile () { //only reading from .csv, I need to implements for .xls and .xlsx files
         TreeMap<Double, ArrayList<Integer>> readInput = new TreeMap<>();
-        BufferedReader cin = new BufferedReader(new FileReader(sourceFolder));
-        cin.readLine(); //jump de first line
 
-        while(true) {
-            stringTokenizer = new StringTokenizer(cin.readLine());
-            String line = stringTokenizer.nextToken();
-            String[] array_element = line.split(",");
-            double currentTime = Double.parseDouble(array_element[0]);
-            ArrayList<Integer> temperaturesList = new ArrayList<>();
+        try {
+            CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(sourceFile.toString()), StandardCharsets.ISO_8859_1));
+            String[] nextLine;
+            reader.readNext();  //I don't care the first line
 
-            //if (checkTime(time)) {
-            for (int i = 1; i < array_element.length; i++)
-                temperaturesList.add(Integer.parseInt(array_element[i]));
+            while ((nextLine = reader.readNext()) != null) {
+                double time = Double.parseDouble(nextLine[0]);
+                ArrayList<Integer> temperaturesList = new ArrayList<>();
 
-            readInput.put(currentTime, temperaturesList);
-            //}
-            if (!cin.ready())
-                break;
+                for (int i = 1; i < nextLine.length; i++) {
+                    temperaturesList.add(Integer.parseInt(nextLine[i]));
+                    readInput.put(time, temperaturesList);
+                }
+
+            }
+
+            reader.close();
+        } catch (Exception e) {
+            System.out.println("Reading File Error");
+            e.getMessage();
+            e.printStackTrace();
         }
-
-        cin.close();    //close the file
 
         return readInput;
     }
@@ -53,5 +62,15 @@ public class FileReading {
         }
 
         return check;
+    }
+
+    @Override
+    protected TreeMap<Double, ArrayList<Integer>> call() throws Exception {
+
+        updateMessage("Procesando... Hilo => " + Thread.currentThread().getName());
+        TreeMap<Double, ArrayList<Integer>> treeMap = readFile();
+        updateMessage("Terminado... Hilo => " + Thread.currentThread().getName());
+        updateProgress(100, 100);
+        return treeMap;
     }
 }
